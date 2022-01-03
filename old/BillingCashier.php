@@ -2495,7 +2495,6 @@ class BillingCashier extends MY_Controller {
 		
 		//customer
 		$customer_id = $this->input->post('customer_id');
-		$customer_representative = $this->input->post('customer_representative');
 		
 		if($payment_id == 4 AND $cashier_credit_ar == 1 AND empty($customer_id)){
 			$r = array('success' => false, 'info' => '<br/>Pilih Customer untuk Penggunaan Pembayaran: Credit - AR / Piutang!');
@@ -3012,7 +3011,6 @@ class BillingCashier extends MY_Controller {
 				'bank_id'		=>	$bank_id,
 				'card_no'		=>	$card_no,
 				'customer_id'	=>	$customer_id,
-				'customer_representative' => $customer_representative,
 				'sales_id'		=>	$sales_id,
 				'sales_percentage'	=>	$sales_percentage,
 				'sales_price'		=>	$sales_price,

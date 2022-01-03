@@ -160,7 +160,7 @@ class ReportSales extends MY_Controller {
 				$data_post['user_kasir'] = '';
 			}
 			$this->db->select("a.*, a.id as billing_id, a.updated as billing_date, d.payment_type_name, e.bank_name,
-								g.nama_shift, g2.customer_name, g2.customer_representative, g3.sales_name, CONCAT(h.user_firstname,' ',h.user_lastname) as nama_kasir");
+								g.nama_shift, g2.customer_name, g3.sales_name, CONCAT(h.user_firstname,' ',h.user_lastname) as nama_kasir");
 			$this->db->from($this->table." as a");
 			$this->db->join($this->prefix.'payment_type as d','d.id = a.payment_id','LEFT');
 			$this->db->join($this->prefix.'bank as e','e.id = a.bank_id','LEFT');
@@ -503,19 +503,19 @@ class ReportSales extends MY_Controller {
 						$s['payment_note'] .= strtoupper($s['payment_type_name']).': '.strtoupper($s['bank_name']).' '.$card_no.' ';
 					}
 					
-					/*if(!empty($s['billing_notes'])){
+					if(!empty($s['billing_notes'])){
 						if(!empty($s['payment_note'])){
 							$s['payment_note'] .= '<br/>';
 						}
 						$s['payment_note'] .= $s['billing_notes'];
-					}*/
+					}
 					
-					/*if(!empty($s['customer_id'])){
+					if(!empty($s['customer_id'])){
 						if(!empty($s['payment_note'])){
 							$s['payment_note'] .= '<br/>';
 						}
 						$s['payment_note'] .= 'Cust/Member: '.$s['customer_name'];
-					}*/
+					}
 					
 					if(!empty($s['sales_id'])){
 						if(!empty($s['payment_note'])){
@@ -866,7 +866,7 @@ class ReportSales extends MY_Controller {
 			}
 			
 			$this->db->select("a.*, a.id as billing_id, a.updated as billing_date, d.payment_type_name, e.bank_name,
-								g.nama_shift, g2.customer_name, g2.customer_representative, g3.sales_name, CONCAT(h.user_firstname,' ',h.user_lastname) as nama_kasir");
+								g.nama_shift, g2.customer_name, g3.sales_name, CONCAT(h.user_firstname,' ',h.user_lastname) as nama_kasir");
 			$this->db->from($this->table." as a");
 			$this->db->join($this->prefix.'payment_type as d','d.id = a.payment_id','LEFT');
 			$this->db->join($this->prefix.'bank as e','e.id = a.bank_id','LEFT');
@@ -1226,19 +1226,19 @@ class ReportSales extends MY_Controller {
 						$s['payment_note'] .= strtoupper($s['payment_type_name']).': '.strtoupper($s['bank_name']).' '.$card_no.' ';
 					}
 					
-					/*if(!empty($s['billing_notes'])){
+					if(!empty($s['billing_notes'])){
 						if(!empty($s['payment_note'])){
 							$s['payment_note'] .= '<br/>';
 						}
 						$s['payment_note'] .= $s['billing_notes'];
-					}*/
+					}
 					
-					/*if(!empty($s['customer_id'])){
+					if(!empty($s['customer_id'])){
 						if(!empty($s['payment_note'])){
 							$s['payment_note'] .= '<br/>';
 						}
 						$s['payment_note'] .= 'Cust/Member: '.$s['customer_name'];
-					}*/
+					}
 					
 					if(!empty($s['sales_id'])){
 						if(!empty($s['payment_note'])){

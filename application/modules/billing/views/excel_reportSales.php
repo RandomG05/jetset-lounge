@@ -113,6 +113,7 @@ if($show_shift_kasir == false){
 				<td class="tbl_head_td_first_xcenter" width="50" rowspan="2">NO</td>
 				<td class="tbl_head_td_xcenter" width="130" rowspan="2">PAYMENT DATE</td>
 				<td class="tbl_head_td_xcenter" width="80" rowspan="2">BILLING NO.</td>
+				<td class="tbl_head_td_xcenter" width="80" rowspan="2">CUSTOMER</td>
 				<td class="tbl_head_td_xcenter" width="120" rowspan="2">TOTAL BILLING</td>
 				<?php
 				if($diskon_sebelum_pajak_service == 1 OR count($display_discount_type) > 1){
@@ -184,6 +185,7 @@ if($show_shift_kasir == false){
 				
 				if($show_note == true){
 				?>
+				<td class="tbl_head_td_xcenter" width="300" rowspan="2">FLIGHT NOTES</td>
 				<td class="tbl_head_td_xcenter" width="300" rowspan="2">NOTE</td>
 				<?php
 				}
@@ -254,6 +256,11 @@ if($show_shift_kasir == false){
 						<td class="tbl_data_td_first_xcenter"><?php echo $no; ?></td>
 						<td class="tbl_data_td">&nbsp;<?php echo date("Y-m-d", strtotime($det['payment_date'])); ?></td>
 						<td class="tbl_data_td"><?php echo $det['billing_no']; ?></td>
+						<td class="tbl_data_td"><?php echo $det['customer_name']; 
+						if(!empty($det['customer_representative'])) {
+							echo ', '.$det['customer_representative'];
+						}
+						?></td>
 						<?php
 						if($format_nominal == true){
 							$det['total_billing_show'] = 'Rp. '.$det['total_billing_show'];
@@ -619,6 +626,7 @@ if($show_shift_kasir == false){
 						
 					if($show_note == true){
 					?>
+					<td class="tbl_summary_td_xright">&nbsp;</td>
 					<td class="tbl_summary_td_xright">&nbsp;</td>
 					<?php
 					}

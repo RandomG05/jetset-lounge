@@ -114,7 +114,6 @@
 					<td class="first xcenter" width="50" rowspan="2">NO</td>
 					<td class="xcenter" width="130" rowspan="2">PAYMENT DATE</td>
 					<td class="xcenter" width="80" rowspan="2">BILLING NO.</td>
-					<td class="xcenter" width=130" rowspan="2">CUSTOMER</td>
 					<td class="xcenter" width="110" rowspan="2">TOTAL BILLING</td>
 					<?php
 					if($diskon_sebelum_pajak_service == 1 OR count($display_discount_type) > 1){
@@ -185,7 +184,6 @@
 					
 					if($show_note == true){
 					?>
-					<td class="xcenter" width="300" rowspan="2">FLIGHT NOTES</td>
 					<td class="xcenter" width="300" rowspan="2">NOTE</td>
 					<?php
 					}
@@ -266,9 +264,6 @@
 							<td class="first xcenter"><?php echo $no; ?></td>
 							<td class="xcenter"><?php echo $det['payment_date']; ?></td>
 							<td class="xcenter"><?php echo $det['billing_no']; ?></td>
-							<td class="xcenter"><?php echo $det['customer_name'];
-							if(!empty($det['customer_representative'])) {
-								echo ', ' . $det['customer_representative'];} ?></td>
 							<td class="xright"><?php echo $det['total_billing_show']; ?></td>
 							<?php
 							if($diskon_sebelum_pajak_service == 1 OR count($display_discount_type) > 1){
@@ -421,7 +416,6 @@
 							
 							if($show_note == true){
 							?>
-							<td class="xleft"><?php echo $det['billing_notes']; ?></td>
 							<td class="xleft"><?php echo $det['payment_note']; ?></td>
 							<?php
 							}
@@ -578,9 +572,6 @@
 						if($show_shift_kasir == true){
 						?>
 						<td class="xright xbold">&nbsp;</td>
-						<td class="xright xbold">&nbsp;</td>
-						<td class="xright xbold">&nbsp;</td>
-
 						<?php
 						}
 						
