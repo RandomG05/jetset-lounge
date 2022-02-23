@@ -40,7 +40,7 @@
 		<?php
 	}else{
 		?>
-		<div style="width:400px; margin:100px auto 0px;"><img src="<?php echo BASE_URL; ?>apps.min/helper/login/logo.png"></div>
+		<div style="width:450px; margin:100px auto 0px;"><img src="<?php echo BASE_URL; ?>apps.min/helper/login/logo.png"></div>
 		<?php
 	}
 	?>
@@ -300,7 +300,7 @@
 		}],
 		listeners : {
 			show : function (window, eOpts) {
-				window.alignTo(document.body, 't', [-150,220]);
+				window.alignTo(document.body, 't', [-150,320]);
 			},
 		}
 		
