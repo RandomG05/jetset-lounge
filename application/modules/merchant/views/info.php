@@ -50,7 +50,7 @@
 							if(!empty($error)){
 								echo $error;
 							}else{
-								echo 'Silahkan Cek Merchant Key Store/Cafe/Resto Anda di WePOS.id<br/>';
+								echo 'Silahkan Cek Merchant Key Store/Cafe/Resto Anda di SPOS.id<br/>';
 							}
 							?>
 							

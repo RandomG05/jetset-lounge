@@ -1,12 +1,12 @@
 
-WePOS - Cafe v.3.42.22 (Free Version)
+SPOS - Cafe v.3.42.22 (Free Version)
 Updated: 07-01-2021 01:00:00
 
 Cocok untuk:
 Cafe/Resto/Rumah Makan (semua penjualan berbasis Cafe)
 
-Terima Kasih sudah Download dan Support WePOS.id, 
-WePOS sudah dibuat sejak tahun 2015, update bertahap sesuai kebutuhan Cafe & Resto
+Terima Kasih sudah Download dan Support SPOS.id, 
+SPOS sudah dibuat sejak tahun 2015, update bertahap sesuai kebutuhan Cafe & Resto
 untuk versi Retail/Toko: https://github.com/copolatoz/wepos-retail
 
 *untuk auto update: silahkan daftarkan merchant/cafe/resto untuk mendapatkan merchant-key
@@ -38,7 +38,7 @@ untuk versi Retail/Toko: https://github.com/copolatoz/wepos-retail
 		*jika .htaccess tidak ditemukan, ubah settingan folder anda agar dapat melihat hidden file dan ekstensi file
 		*gunakan editor semisal notepad++ untuk save-as atau membuat/edit file .htaccess
 	
-	#integrasi dengan WePOS.Cashier - Android:
+	#integrasi dengan SPOS.Cashier - Android:
 	1. rename folder utama (default: 'wepos-free') menjadi 'wepos'
 	2. ubah isi/text pada file .htaccess (default: 'wepos-free') menjadi 'wepos'
 
@@ -47,9 +47,9 @@ untuk versi Retail/Toko: https://github.com/copolatoz/wepos-retail
 
 *Untuk Instalasi lengkap bisa baca di dokumentasi (login website, wepos.id)
 #Silahkan Donasi untuk versi gratisan yang lebih baik ^^ 
-#terima kasih untuk rekan-rekan yang sudah support WePOS
+#terima kasih untuk rekan-rekan yang sudah support SPOS
 
-Team WePOS ^^
+Team SPOS ^^
 contact@wepos.id 
 081222549676
 

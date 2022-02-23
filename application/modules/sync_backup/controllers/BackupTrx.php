@@ -296,7 +296,7 @@ class BackupTrx extends MY_Controller {
 			die(json_encode($r));
 		}
 		if(!empty($get_opt['as_server_backup'])){
-			$r = array('success' => false, 'info' => 'Aplikasi WePOS ini di set sebagai Server Backup!');
+			$r = array('success' => false, 'info' => 'Aplikasi SPOS ini di set sebagai Server Backup!');
 			die(json_encode($r));
 		}
 		
@@ -1246,7 +1246,7 @@ class BackupTrx extends MY_Controller {
 		}
 		
 		if(!empty($get_opt['as_server_backup'])){
-			$r = array('success' => false, 'info' => 'Aplikasi WePOS ini di set sebagai Server Backup!');
+			$r = array('success' => false, 'info' => 'Aplikasi SPOS ini di set sebagai Server Backup!');
 			die(json_encode($r));
 		}
 		
@@ -3901,7 +3901,7 @@ class BackupTrx extends MY_Controller {
 			die(json_encode($r));
 		}
 		if(!empty($get_opt['as_server_backup'])){
-			$r = array('success' => false, 'info' => 'Aplikasi WePOS ini di set sebagai Server Backup!');
+			$r = array('success' => false, 'info' => 'Aplikasi SPOS ini di set sebagai Server Backup!');
 			die(json_encode($r));
 		}
 		

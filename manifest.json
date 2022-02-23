@@ -1,7 +1,7 @@
 {
-  "short_name": "WePOS",
-  "name": "WePOS.id",
-  "description": "WePOS.id - Aplikasi Kasir Handal",
+  "short_name": "SPOS",
+  "name": "SPOS.id",
+  "description": "SPOS.id - Aplikasi Kasir Handal",
   "icons": [
     {
       "src": "apps.min/helper/login/icons-192.png",
@@ -20,9 +20,9 @@
   "theme_color": "#00afef",
   "shortcuts": [
 		{
-		  "short_name": "WePOS",
-		  "name": "WePOS.id",
-		  "description": "WePOS.id - Aplikasi Kasir Handal",
+		  "short_name": "SPOS",
+		  "name": "SPOS.id",
+		  "description": "SPOS.id - Aplikasi Kasir Handal",
 		  "url": "/?source=pwa",
 		  "icons": [{ "src": "apps.min/helper/login/icons-192.png", "sizes": "192x192" }]
 		}

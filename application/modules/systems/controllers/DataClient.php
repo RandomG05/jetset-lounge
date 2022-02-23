@@ -430,7 +430,7 @@ class DataClient extends MY_Controller {
 					$data_client['merchant_tipe_show'] = '<font color="green"><b>'.strtoupper($merchant_tipe).'</b></font>';
 					$data_client['produk_nama_show'] = '<font color="green"><b>'.$produk_nama.' ('.$produk_key.')</b></font>';
 					
-					$data_client['info_koneksi'] = '<font color="blue"><b>Merchant Terdaftar di WePOS.id</b></font>';
+					$data_client['info_koneksi'] = '<font color="blue"><b>Merchant Terdaftar di SPOS.id</b></font>';
 					
 				}else{
 					
@@ -447,9 +447,9 @@ class DataClient extends MY_Controller {
 						$data_client['merchant_tipe_show'] = '<font color="blue"><b>'.strtoupper($merchant_tipe).'</b></font>';
 						$data_client['produk_nama_show'] = '<font color="blue"><b>'.$produk_nama.' ('.$produk_key.')</b></font>';
 						
-						$data_client['info_koneksi'] = '<font color="blue"><b>Merchant Terdaftar di WePOS.id</b></font>';
+						$data_client['info_koneksi'] = '<font color="blue"><b>Merchant Terdaftar di SPOS.id</b></font>';
 						if($verified['merchant_verified'] == 'unverified'){
-							$data_client['info_koneksi'] = '<font color="red"><b>Merchant Key Tidak Terdaftar di WePOS.id</b></font>';
+							$data_client['info_koneksi'] = '<font color="red"><b>Merchant Key Tidak Terdaftar di SPOS.id</b></font>';
 						}
 						
 					}else{
@@ -466,11 +466,11 @@ class DataClient extends MY_Controller {
 						$data_client['merchant_tipe_show'] = '<font color="blue"><b>'.strtoupper($merchant_tipe).'</b></font>';
 						$data_client['produk_nama_show'] = '<font color="blue"><b>'.$produk_nama.' ('.$produk_key.')</b></font>';
 						
-						$data_client['info_koneksi'] = '<font color="red"><b>Merchant Key Tidak Terdaftar di WePOS.id</b></font>';
+						$data_client['info_koneksi'] = '<font color="red"><b>Merchant Key Tidak Terdaftar di SPOS.id</b></font>';
 					}
 					
 					if($verified == 'koneksi'){
-						$data_client['info_koneksi'] = '<font color="red"><b>Koneksi ke WePOS.id Gagal!</b></font>';
+						$data_client['info_koneksi'] = '<font color="red"><b>Koneksi ke SPOS.id Gagal!</b></font>';
 					}
 					if($verified == 'user'){
 						$data_client['info_koneksi'] = '<font color="red"><b>Kode/Merchant Tidak Dikenali</b></font>';

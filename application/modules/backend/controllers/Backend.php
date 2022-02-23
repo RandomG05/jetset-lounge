@@ -114,12 +114,12 @@ class Backend extends MY_Controller {
 				$update_var['wepos_version'] = '3.42.22';
 			}
 			if(empty($get_opt['app_name'])){
-				$get_opt['app_name'] = 'WePOS.Cafe';
-				$update_var['app_name'] = 'WePOS.Cafe';
+				$get_opt['app_name'] = 'SPOS.Cafe';
+				$update_var['app_name'] = 'SPOS.Cafe';
 			}
 			if(empty($get_opt['app_name_short'])){
-				$get_opt['app_name_short'] = 'WePOS.Cafe';
-				$update_var['app_name_short'] = 'WePOS.Cafe';
+				$get_opt['app_name_short'] = 'SPOS.Cafe';
+				$update_var['app_name_short'] = 'SPOS.Cafe';
 			}
 			if(empty($get_opt['app_release'])){
 				$get_opt['app_release'] = '2020';

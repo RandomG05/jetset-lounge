@@ -1,6 +1,6 @@
 /*
 
-WePOS.Cafe : v.3.42.22 (Januari 2021)
+SPOS.Cafe : v.3.42.22 (Januari 2021)
 MySQL - 5.6.24 : Database
 Updated: 01-01-2021 01:00
 
@@ -733,7 +733,7 @@ INSERT INTO `apps_modules` (`id`, `module_name`, `module_author`, `module_versio
 (10, 'Refresh Aplikasi', 'dev@wepos.id', 'v.1.0.0', '', 'systems', 'refreshModule', 0, 'Refresh Aplikasi', 1, 'icon-refresh', 'icon-refresh', '', '', 1, 0, 0, 0, 'Refresh Aplikasi', 1304, 'icon-refresh', '', 0, 'icon-refresh', '', 1, 'icon-refresh', '', 0, 'icon-refresh', '', 'administrator', '2019-03-07 01:00:19', 'administrator', '2019-03-07 01:00:19', 1, 0),
 (11, 'Lock Screen', 'dev@wepos.id', 'v.1.0.0', 'User Lock Screen', 'systems', 'lockScreen', 0, 'LockScreen', 1, 'icon-grid', 'icon-grid', '', '', 1, 1, 0, 0, 'LockScreen', 1305, 'icon-grid', '', 0, 'icon-grid', '', 1, 'icon-grid', '', 0, 'icon-grid', '', 'administrator', '2019-02-16 11:40:20', 'administrator', '2019-03-07 10:00:00', 1, 0),
 (12, 'Logout', 'dev@wepos.id', 'v.1.0.0', 'Just Logout Module', 'systems', 'logoutModule', 0, 'Logout', 1, 'icon-grid', 'icon-grid', '', '', 1, 1, 0, 0, 'Logout', 1306, 'icon-grid', '', 0, 'icon-grid', '', 1, 'icon-grid', '', 0, 'icon-grid', '', 'administrator', '2019-02-16 11:36:16', 'administrator', '2019-03-07 01:06:35', 1, 0),
-(13, 'WePOS Update', 'dev@wepos.id', 'v.1.0.0', 'WePOS Update', 'systems', 'weposUpdate', 0, '1. Master Aplikasi>WePOS Update', 1, 'icon-sync', 'icon-grid', '', '', 1, 0, 1, 0, '1. Master Aplikasi>WePOS Update', 1401, 'icon-sync', '', 0, 'icon-sync', '', 1, 'icon-sync', '', 1, 'icon-sync', '', 'administrator', '2019-03-06 18:00:58', 'administrator', '2019-03-06 18:00:58', 1, 0),
+(13, 'SPOS Update', 'dev@wepos.id', 'v.1.0.0', 'SPOS Update', 'systems', 'weposUpdate', 0, '1. Master Aplikasi>SPOS Update', 1, 'icon-sync', 'icon-grid', '', '', 1, 0, 1, 0, '1. Master Aplikasi>SPOS Update', 1401, 'icon-sync', '', 0, 'icon-sync', '', 1, 'icon-sync', '', 1, 'icon-sync', '', 'administrator', '2019-03-06 18:00:58', 'administrator', '2019-03-06 18:00:58', 1, 0),
 (14, 'Notifikasi Sistem', 'dev@wepos.id', 'v.1.0.0', 'Notifikasi Sistem', 'systems', 'systemNotify', 0, 'Notifikasi Sistem', 1, 'icon-info', 'icon-info', '', '', 1, 1, 0, 0, 'Notifikasi Sistem', 1402, 'icon-info', '', 0, 'icon-info', '', 0, 'icon-info', '', 0, 'icon-info', '', 'administrator', '2019-03-06 18:00:58', 'administrator', '2019-03-06 18:00:58', 1, 0),
 (15, 'Menu Category', 'dev@wepos.id', 'v.1.0', '', 'master_pos', 'productCategory', 0, '2. Master POS>Menu Category', 2, 'icon-grid', 'icon-grid', '', '', 1, 0, 1, 0, '2. Master POS>Menu Category', 2101, 'icon-grid', '', 0, 'icon-grid', '', 1, 'icon-grid', '', 1, 'icon-grid', '', 'administrator', '2019-03-07 03:26:07', 'administrator', '2019-03-07 10:00:00', 1, 0),
 (16, 'Master Menu & Package', 'dev@wepos.id', 'v.1.0', 'Master Menu & Package', 'master_pos', 'masterProduct', 0, '2. Master POS>Master Menu', 2, 'icon-grid', 'icon-grid', '', '', 1, 0, 1, 0, '2. Master POS>Master Menu', 2102, 'icon-grid', '', 0, 'icon-grid', '', 1, 'icon-grid', '', 1, 'icon-grid', '', 'administrator', '2019-03-07 03:24:38', 'administrator', '2019-03-07 10:00:00', 1, 0),
@@ -1078,8 +1078,8 @@ INSERT INTO `apps_options` (`id`, `option_var`, `option_value`, `option_descript
 (237, 'hide_detail_compliment', '1', NULL, NULL, '', NULL, NULL, 1, 0),
 (238, 'hold_table_timer', '', NULL, NULL, '', NULL, NULL, 1, 0),
 (239, 'use_block_table', '', NULL, NULL, '', NULL, NULL, 1, 0),
-(242, 'app_name', 'WePOS.Cafe', NULL, NULL, '', NULL, NULL, 1, 0),
-(243, 'app_name_short', 'WePOS.Cafe', NULL, NULL, '', NULL, NULL, 1, 0),
+(242, 'app_name', 'SPOS.Cafe', NULL, NULL, '', NULL, NULL, 1, 0),
+(243, 'app_name_short', 'SPOS.Cafe', NULL, NULL, '', NULL, NULL, 1, 0),
 (244, 'app_release', '2021', NULL, NULL, '', NULL, NULL, 1, 0),
 (245, 'billing_no_simple', '', NULL, '2019-11-10 17:00:00', 'administrator', NULL, NULL, 1, 0),
 (246, 'mode_bazaar_foodcourt', '0', NULL, '2019-11-10 17:00:00', 'administrator', NULL, NULL, 1, 0),
@@ -1782,9 +1782,9 @@ CREATE TABLE IF NOT EXISTS `apps_users` (
 
 INSERT INTO `apps_users` (`id`, `user_username`, `user_password`, `role_id`, `user_firstname`, `user_lastname`, `user_email`, `user_phone`, `user_mobile`, `user_address`, `client_id`, `client_structure_id`, `avatar`, `createdby`, `created`, `updatedby`, `updated`, `is_active`, `is_deleted`, `user_pin`) VALUES
 (1, 'administrator', 'e10adc3949ba59abbe56e057f20f883e', 1, 'Super', 'Admin', 'contact@wepos.id', '6281222549676', '1231239990111', 'Bandung - West Java - Indonesia', 1, 1, '0', 'administrator', '2019-03-07 01:00:00', 'administrator', '2019-03-07 01:00:00', 1, 0, '9999'),
-(2, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 2, 'Admin', 'WePOS', 'contact@wepos.id', '', '', '', 1, 2, '0', 'administrator', '2019-03-07 01:00:00', 'administrator', '2019-03-07 01:00:00', 1, 0, '1234'),
-(3, 'kasir', 'e10adc3949ba59abbe56e057f20f883e', 5, 'Kasir', 'WePOS', 'contact@wepos.id', NULL, NULL, NULL, 1, 7, '0', 'administrator', '2019-03-07 01:00:00', 'administrator', '2019-03-07 01:00:00', 1, 0, '7890'),
-(4, 'purchasing', 'e10adc3949ba59abbe56e057f20f883e', 3, 'Purchasing', 'WePOS', 'contact@wepos.id', '', '', '', 1, 11, NULL, 'admin', '2019-03-07 10:17:05', 'admin', '2019-03-07 10:17:18', 1, 0, '8165');
+(2, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 2, 'Admin', 'SPOS', 'contact@wepos.id', '', '', '', 1, 2, '0', 'administrator', '2019-03-07 01:00:00', 'administrator', '2019-03-07 01:00:00', 1, 0, '1234'),
+(3, 'kasir', 'e10adc3949ba59abbe56e057f20f883e', 5, 'Kasir', 'SPOS', 'contact@wepos.id', NULL, NULL, NULL, 1, 7, '0', 'administrator', '2019-03-07 01:00:00', 'administrator', '2019-03-07 01:00:00', 1, 0, '7890'),
+(4, 'purchasing', 'e10adc3949ba59abbe56e057f20f883e', 3, 'Purchasing', 'SPOS', 'contact@wepos.id', '', '', '', 1, 11, NULL, 'admin', '2019-03-07 10:17:05', 'admin', '2019-03-07 10:17:18', 1, 0, '8165');
 
 -- --------------------------------------------------------
 
@@ -2720,7 +2720,7 @@ CREATE TABLE IF NOT EXISTS `pos_customer` (
 --
 
 INSERT INTO `pos_customer` (`id`, `customer_code`, `customer_name`, `customer_contact_person`, `customer_address`, `customer_phone`, `customer_fax`, `customer_email`, `createdby`, `created`, `updatedby`, `updated`, `is_active`, `is_deleted`, `customer_status`, `keterangan_blacklist`, `source_from`, `customer_no`, `customer_city`, `limit_kredit`, `termin`, `sales_id`) VALUES
-(1, 'C18080001', 'WePOS Customer Test', 'WePOS', 'Bandung', '022', NULL, 'support@wepos.id', 'admin', '2019-03-07 15:16:28', 'admin', '2019-03-07 15:16:28', 1, 0, 'ok', '', 'MERCHANT', 1, NULL, 0, NULL, 0);
+(1, 'C18080001', 'SPOS Customer Test', 'SPOS', 'Bandung', '022', NULL, 'support@wepos.id', 'admin', '2019-03-07 15:16:28', 'admin', '2019-03-07 15:16:28', 1, 0, 'ok', '', 'MERCHANT', 1, NULL, 0, NULL, 0);
 
 -- --------------------------------------------------------
 
