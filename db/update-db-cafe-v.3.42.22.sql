@@ -1,7 +1,7 @@
 /*
 
 MIGRASI DATABASE
-WePOS - Cafe: v3.42.21 ke v3.42.22
+SPOS - Cafe: v3.42.21 ke v3.42.22
 Updated: 02-09-2020 07:00
 
 *********************************************************************
@@ -11,9 +11,9 @@ Updated: 02-09-2020 07:00
 
 UPDATE apps_options SET option_value = '3.42.22' WHERE option_var = 'wepos_version';
 #
-UPDATE apps_options SET option_value = 'WePOS.Cafe' WHERE option_var = 'app_name';
+UPDATE apps_options SET option_value = 'SPOS.Cafe' WHERE option_var = 'app_name';
 #
-UPDATE apps_options SET option_value = 'WePOS.Cafe' WHERE option_var = 'app_name_short';
+UPDATE apps_options SET option_value = 'SPOS.Cafe' WHERE option_var = 'app_name_short';
 #
 UPDATE apps_options SET option_value = '2021' WHERE option_var = 'app_release';
 #

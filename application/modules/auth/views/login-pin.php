@@ -419,7 +419,7 @@
 
 	  const that = this;
 
-	  navigator.serviceWorker.register(appUrl+'sw-wepos.js')
+	  navigator.serviceWorker.register(appUrl+'sw-SPOS.js')
 		.then(function(reg) {
 		  console.info('SW ok');
 
@@ -518,8 +518,8 @@
 	}
 
 	</script>		
-	<!-- Start of wepos Zendesk Widget script -->
+	<!-- Start of SPOS Zendesk Widget script -->
 	<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=070b419f-4ff0-414d-9bee-29eb623a28b5"> </script>
-	<!-- End of wepos Zendesk Widget script -->
+	<!-- End of SPOS Zendesk Widget script -->
 </body>
 </html>

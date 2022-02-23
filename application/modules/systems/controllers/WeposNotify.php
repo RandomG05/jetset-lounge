@@ -684,7 +684,7 @@ class WeposNotify extends MY_Controller {
 					}
 					
 					if($sisa_hari >= 0){
-						$r = array('success' => false, 'info' => 'Masa berlaku aplikasi WePOS.id anda akan berakhir<br/>pada tanggal: <b>'.$get_opt['produk_expired'].', <font color="red">'.$sisa_hari_text.' lagi</font></b><br/><br/>Silakan lakukan perpanjangan aplikasi</br>via website: <b>https://wepos.id</b><br/><br/>untuk pertanyaan seputar masa aktif hubungi<br/>CS: <b>0812-2254-9676</b></br>');
+						$r = array('success' => false, 'info' => 'Masa berlaku aplikasi SPOS.id anda akan berakhir<br/>pada tanggal: <b>'.$get_opt['produk_expired'].', <font color="red">'.$sisa_hari_text.' lagi</font></b><br/><br/>Silakan lakukan perpanjangan aplikasi</br>via website: <b>https://SPOS.id</b><br/><br/>untuk pertanyaan seputar masa aktif hubungi<br/>CS: <b>0812-2254-9676</b></br>');
 						die(json_encode($r));
 					}
 				}

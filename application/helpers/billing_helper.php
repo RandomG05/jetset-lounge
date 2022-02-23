@@ -8,7 +8,7 @@
  * @package   Framework System
  * @author    angga nugraha (angga.nugraha@gmail.com)
  * @version   0.1
- * Copyright (c) 2020 Angga Nugraha  (https://wepos.id)
+ * Copyright (c) 2020 Angga Nugraha  (https://SPOS.id)
 */
 
 
@@ -133,7 +133,10 @@ if(!function_exists('getBilling')){
 					'createdby'		=>	$session_user,
 					'updated'		=>	$date_now,
 					'updatedby'		=>	$session_user,
-					'shift'			=>	$shift
+					'shift'			=>	$shift,
+					'total_guest'	=> 0,
+					'total_crew'	=> 0,
+					'total_gh'		=> 0,
 				),
 				'table'		=>  $scope->table
 			);
@@ -167,15 +170,15 @@ if(!function_exists('getBilling')){
 			a.card_no, a.include_tax, a.tax_percentage, a.tax_total, a.include_service, a.service_percentage, a.service_total, 
 			a.discount_id, a.discount_notes, a.discount_percentage, a.discount_price, a.discount_total, a.total_hpp, 
 			a.is_active, a.total_dp, a.compliment_total, a.total_cash, a.total_credit, a.createdby, a.updatedby, 
-			a.merge_id, a.merge_main_status, a.split_from_id, a.total_guest, a.lock_billing, a.qc_notes,
+			a.merge_id, a.merge_main_status, a.split_from_id, a.total_guest, a.total_crew, a.total_gh, a.signature, a.lock_billing, a.qc_notes,
 			a.created, a.updated, a.takeaway_no_tax, a.takeaway_no_service, a.is_compliment, 
 			a.discount_perbilling, a.total_return, a.compliment_total_tax_service, a.is_half_payment,
 			a.sales_id, a.sales_percentage, a.sales_price, a.sales_type, a.customer_id,  a.block_table,
-			a.id as billing_id, a.voucher_no, a.is_sistem_tawar, a.single_rate, a.is_reservation,
+			a.id as billing_id, a.voucher_no, a.is_sistem_tawar, a.single_rate, a.is_reservation, a.time_in,
 			a.txmark, a.txmark_no,
 			b.table_name, b.table_no as table_no_real, b.table_tipe, b.table_desc, b.floorplan_id, c.floorplan_name, 
 			d.payment_type_name, e.user_firstname, e.user_lastname, f.bank_name, 
-			g.billing_no as merge_billing_no, h.sales_name, h.sales_company, i.customer_name, i.customer_code');
+			g.billing_no as merge_billing_no, h.sales_name, h.sales_company, i.customer_name, i.customer_code, i.customer_phone, i.customer_email, i.customer_representative, i.customer_address');
 		$scope->db->from($scope->table." as a");
 		$scope->db->join($scope->prefix.'table as b','b.id = a.table_id','LEFT');
 		$scope->db->join($scope->prefix.'floorplan as c','c.id = b.floorplan_id','LEFT');
@@ -1397,7 +1400,7 @@ if(!function_exists('updateTable')){
 			
 			$scope->db->select('a.id, a.id as invid, a.table_id, a.billing_no, a.tanggal, a.status, a.total_billing, b.*, 
 									c.floorplan_name, c.list_no, c2.room_name, c2.room_no, 
-									d.id as billing_id, d.billing_status, d.total_guest, d.table_id as billing_table');
+									d.id as billing_id, d.billing_status, d.total_guest, d.total_crew, d.total_gh, d.table_id as billing_table');
 			$scope->db->from($scope->table_inventory.' as a');
 			$scope->db->join($scope->table.' as b','b.id = a.table_id','LEFT');
 			$scope->db->join($scope->floorplan.' as c','c.id = b.floorplan_id','LEFT');

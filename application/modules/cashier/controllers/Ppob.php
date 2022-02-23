@@ -115,7 +115,7 @@ class Ppob extends MY_Controller {
 		
 		$ipserver_management_systems = prep_url($ipserver_management_systems);
 		
-		//wepos.id
+		//SPOS.id
 		$client_url = config_item('website').'/merchant/checkPPOB?_dc='.$mktime_dc;
 		
 		$post_data = array(

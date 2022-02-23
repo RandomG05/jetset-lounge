@@ -28,6 +28,16 @@
 	<link rel="apple-touch-icon" sizes="180x180" href="<?php echo base_url(); ?>apps.min/helper/login/icon-180x180.png">
 	<link rel="stylesheet" href="<?php echo base_url().'assets/desktop/css/loading.css'; ?>" />
 	<script src="<?php echo base_url().'backend/config?v='.time(); ?>" type="text/javascript" charset="utf-8"></script>
+
+	<link href="<?php echo base_url().'assets/js/jquery-ui.css';?>" rel="stylesheet">
+	<link href="<?php echo base_url().'assets/js/signature/css/jquery.signature.css';?>" rel="stylesheet">
+	<script src="<?php echo base_url().'assets/js/jquery.min.js';?>"></script>
+	<script src="<?php echo base_url().'assets/js/jquery-ui.min.js';?>"></script>
+	<script src="<?php echo base_url().'assets/js/jquery-touch-punch.min.js';?>"></script>
+	<script src="<?php echo base_url().'assets/js/signature/js/jquery.signature.min.js';?>"></script>
+	<style>
+		.kbw-signature { width: 400px; height: 200px; }
+	</style>
 	
 </head>
 <body>
@@ -57,9 +67,9 @@
 	if(empty($get_opt['hide_tanya_wepos'])){
 		if(empty($from_apps)){
 			?>
-			<!-- Start of wepos Zendesk Widget script -->
+			<!-- Start of SPOS Zendesk Widget script -->
 			<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=070b419f-4ff0-414d-9bee-29eb623a28b5"> </script>
-			<!-- End of wepos Zendesk Widget script -->
+			<!-- End of SPOS Zendesk Widget script -->
 			
 			<style>
 			iframe#launcher.zEWidget-launcher.zEWidget-launcher--active{right:64px !important;bottom:-8px !important;height: 50px !important; min-height: 50px !important;margin:0px 0px 0px !important;}

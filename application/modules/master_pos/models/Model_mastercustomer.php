@@ -26,6 +26,7 @@ class Model_mastercustomer extends DB_Model {
 		$customer_phone = $this->input->post('customer_phone');
 		$customer_email = $this->input->post('customer_email');
 		$customer_status = $this->input->post('customer_status');
+		$customer_representative = $this->input->post('customer_representative');
 		$keterangan_blacklist = $this->input->post('keterangan_blacklist');
 		$limit_kredit = $this->input->post('limit_kredit');
 		$termin = $this->input->post('termin');
@@ -136,6 +137,7 @@ class Model_mastercustomer extends DB_Model {
 				    'customer_phone'  	=> 	$customer_phone,
 				    'customer_email'  	=> 	$customer_email,
 				    'customer_status'  	=> 	$customer_status,
+					'customer_representative' => $customer_representative,
 				    'keterangan_blacklist'  => 	$keterangan_blacklist,
 				    'source_from'  	=> 	'MERCHANT',
 					'created'		=>	date('Y-m-d H:i:s'),

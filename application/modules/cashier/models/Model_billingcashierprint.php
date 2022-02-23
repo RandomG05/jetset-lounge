@@ -1254,7 +1254,9 @@ class Model_BillingCashierPrint extends DB_Model {
 							
 						}
 						
-						$subtotal += $order_total;
+						$total_pax = $billingData->total_guest + $billingData->total_crew + $billingData->total_gh;
+						$total_pax*=150000;
+						$subtotal += $order_total + $total_pax;
 						$tax_total += $bil_det->tax_total;
 						$service_total += $bil_det->service_total;
 						$discount_total += $bil_det->discount_total;
@@ -1482,6 +1484,7 @@ class Model_BillingCashierPrint extends DB_Model {
 				if(!empty($billingData->customer_id)){
 					$customer_show .= $billingData->customer_name;
 					$customer_code_show .= $billingData->customer_code;
+					$customer_phone =$billingData->customer_phone;
 				}
 				
 				//update-2003.001
@@ -1495,6 +1498,7 @@ class Model_BillingCashierPrint extends DB_Model {
 					"{date_time}"	=> date("d/m/Y H:i"),
 					"{date_time_APS}"	=> date("H:i, d/m/y"),
 					"{date_time_full}"	=> date("Y-m-d H:i:s"),
+					"{time_in}"	=> date("d-m-Y H:i:s", strtotime($billingData->time_in)),
 					"{user}"	=> $session_user,
 					"{table_no}"	=> $table_no_receipt,
 					"{billing_no}"	=> $billing_no_receipt,
@@ -1518,10 +1522,23 @@ class Model_BillingCashierPrint extends DB_Model {
 					"{payment_type}"=> $payment_type_show,
 					"{customer}"=> $customer_show,
 					"{customer_code}"=> $customer_code_show,
+					"{customer_phone}"=> $billingData->customer_phone,
+					"{customer_email}"=>$billingData->customer_email,
+					"{customer_representative}"=>$billingData->customer_representative,
+					"{customer_address}"=>$billingData->customer_address,
 					"{dp_total}"=> $total_dp_show,
-					"{notes}"=> $billingData->billing_notes,
+					"{boarding}"=> $billingData->billing_notes,
+					"{route}"=>$billingData->qc_notes,
 					"{guest}"=> $billingData->total_guest,
-					"{compliment}"=> $compliment_total_show
+					"{crew}"=>$billingData->total_crew,
+					"{gh}"=>$billingData->total_gh,
+					"{compliment}"=> $compliment_total_show,
+					"{pax_price}"=>priceFormat(150000),
+					"{crew_price}"=>priceFormat(150000),
+					"{gh_price}"=>priceFormat(150000),
+					"{pax_total}"=>priceFormat(150000*$billingData->total_guest),
+					"{crew_total}"=>priceFormat(150000*$billingData->total_crew),
+					"{gh_total}"=>priceFormat(150000*$billingData->total_gh)
 				);
 				
 				//DATE PAID

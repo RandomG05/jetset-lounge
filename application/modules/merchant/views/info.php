@@ -50,12 +50,12 @@
 							if(!empty($error)){
 								echo $error;
 							}else{
-								echo 'Silahkan Cek Merchant Key Store/Cafe/Resto Anda di WePOS.id<br/>';
+								echo 'Silahkan Cek Merchant Key Store/Cafe/Resto Anda di SPOS.id<br/>';
 							}
 							?>
 							
 							<br/>
-							Klik <a href="https://wepos.id/login" target="_blank"><b>https://wepos.id/login</b></a>
+							Klik <a href="https://SPOS.id/login" target="_blank"><b>https://SPOS.id/login</b></a>
 						</p>
 						<div class="clearfix"></div>
 						<div class="footer_login">

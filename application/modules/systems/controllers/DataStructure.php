@@ -6,6 +6,7 @@ class DataStructure extends MY_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		$this->prefix = config_item('db_prefix');
 		$this->load->model('model_DataStructure', 'm');		
 	}
 

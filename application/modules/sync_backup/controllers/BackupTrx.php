@@ -100,7 +100,7 @@ class BackupTrx extends MY_Controller {
 			
 		}else{
 			
-			//wepos.id
+			//SPOS.id
 			$client_url = config_item('website').'/merchant/checkBackup?_dc='.$mktime_dc;
 			
 			$post_data = array(
@@ -296,7 +296,7 @@ class BackupTrx extends MY_Controller {
 			die(json_encode($r));
 		}
 		if(!empty($get_opt['as_server_backup'])){
-			$r = array('success' => false, 'info' => 'Aplikasi WePOS ini di set sebagai Server Backup!');
+			$r = array('success' => false, 'info' => 'Aplikasi SPOS ini di set sebagai Server Backup!');
 			die(json_encode($r));
 		}
 		
@@ -324,7 +324,7 @@ class BackupTrx extends MY_Controller {
 			
 		}else{
 			
-			//wepos.id
+			//SPOS.id
 			$client_url = config_item('website').'/merchant/backupDetail?_dc='.$mktime_dc;
 			
 			$crt_file = ASSETS_PATH.config_item('wepos_crt_file');
@@ -1246,7 +1246,7 @@ class BackupTrx extends MY_Controller {
 		}
 		
 		if(!empty($get_opt['as_server_backup'])){
-			$r = array('success' => false, 'info' => 'Aplikasi WePOS ini di set sebagai Server Backup!');
+			$r = array('success' => false, 'info' => 'Aplikasi SPOS ini di set sebagai Server Backup!');
 			die(json_encode($r));
 		}
 		
@@ -1275,7 +1275,7 @@ class BackupTrx extends MY_Controller {
 			
 		}else{
 			
-			//wepos.id
+			//SPOS.id
 			$client_url = config_item('website').'/merchant/backupGenerate?_dc='.$mktime_dc;
 			
 			$crt_file = ASSETS_PATH.config_item('wepos_crt_file');
@@ -3901,7 +3901,7 @@ class BackupTrx extends MY_Controller {
 			die(json_encode($r));
 		}
 		if(!empty($get_opt['as_server_backup'])){
-			$r = array('success' => false, 'info' => 'Aplikasi WePOS ini di set sebagai Server Backup!');
+			$r = array('success' => false, 'info' => 'Aplikasi SPOS ini di set sebagai Server Backup!');
 			die(json_encode($r));
 		}
 		
@@ -3928,7 +3928,7 @@ class BackupTrx extends MY_Controller {
 			
 		}else{
 			
-			//wepos.id
+			//SPOS.id
 			$client_url = config_item('website').'/merchant/backupLog?_dc='.$mktime_dc;
 			
 			$crt_file = ASSETS_PATH.config_item('wepos_crt_file');
