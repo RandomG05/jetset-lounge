@@ -11,3 +11,4 @@ apps/
 .project
 .htaccess
 index.php
+.vscode/launch.json
