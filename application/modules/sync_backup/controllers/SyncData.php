@@ -103,7 +103,7 @@ class SyncData extends MY_Controller {
 			
 		}else{
 			
-			//wepos.id
+			//SPOS.id
 			$client_url = config_item('website').'/merchant/checkBackup?_dc='.$mktime_dc;
 			
 			$post_data = array(
@@ -328,7 +328,7 @@ class SyncData extends MY_Controller {
 			
 		}else{
 			
-			//wepos.id
+			//SPOS.id
 			$client_url = config_item('website').'/merchant/syncDetail?_dc='.$mktime_dc;
 			
 			$crt_file = ASSETS_PATH.config_item('wepos_crt_file');
@@ -1150,7 +1150,7 @@ class SyncData extends MY_Controller {
 			}
 			
 			//------------------------------BACKUP
-			//wepos.id
+			//SPOS.id
 			$client_url = config_item('website').'/merchant/backupGenerate?_dc='.$mktime_dc;
 			$crt_file = ASSETS_PATH.config_item('wepos_crt_file');
 		
@@ -4425,7 +4425,7 @@ class SyncData extends MY_Controller {
 			
 		}else{
 			
-			//wepos.id
+			//SPOS.id
 			$client_url = config_item('website').'/merchant/backupLog?_dc='.$mktime_dc;
 			
 			$crt_file = ASSETS_PATH.config_item('wepos_crt_file');

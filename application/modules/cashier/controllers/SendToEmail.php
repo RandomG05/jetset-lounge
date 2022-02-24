@@ -150,7 +150,7 @@ class SendToEmail extends MY_Controller {
 		
 		$ipserver_management_systems = prep_url($ipserver_management_systems);
 		
-		//wepos.id
+		//SPOS.id
 		$client_url = config_item('website').'/email/ereceipt?_dc='.$mktime_dc;
 		
 		$post_data = array(

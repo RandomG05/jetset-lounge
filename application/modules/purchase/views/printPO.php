@@ -288,7 +288,7 @@
 			<table align="center">
 				<tr class="tbl-footer">
 					<td class="xcenter">Prepared by:<br/><br/><br/><br/></td>
-				<td><img height="100" style="bottom:0;display:inline-block;" src="http://localhost/wepos-free/assets/resources/signature.png"></td>
+				<td><img height="100" style="bottom:0;display:inline-block;" src="http://localhost/SPOS-free/assets/resources/signature.png"></td>
 				</tr>
 			</table>
 		</div>

@@ -100,7 +100,7 @@ class BackupTrx extends MY_Controller {
 			
 		}else{
 			
-			//wepos.id
+			//SPOS.id
 			$client_url = config_item('website').'/merchant/checkBackup?_dc='.$mktime_dc;
 			
 			$post_data = array(
@@ -324,7 +324,7 @@ class BackupTrx extends MY_Controller {
 			
 		}else{
 			
-			//wepos.id
+			//SPOS.id
 			$client_url = config_item('website').'/merchant/backupDetail?_dc='.$mktime_dc;
 			
 			$crt_file = ASSETS_PATH.config_item('wepos_crt_file');
@@ -1275,7 +1275,7 @@ class BackupTrx extends MY_Controller {
 			
 		}else{
 			
-			//wepos.id
+			//SPOS.id
 			$client_url = config_item('website').'/merchant/backupGenerate?_dc='.$mktime_dc;
 			
 			$crt_file = ASSETS_PATH.config_item('wepos_crt_file');
@@ -3928,7 +3928,7 @@ class BackupTrx extends MY_Controller {
 			
 		}else{
 			
-			//wepos.id
+			//SPOS.id
 			$client_url = config_item('website').'/merchant/backupLog?_dc='.$mktime_dc;
 			
 			$crt_file = ASSETS_PATH.config_item('wepos_crt_file');

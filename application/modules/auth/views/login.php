@@ -31,16 +31,16 @@
 		}
 	</style>
 </head>
-<body style="background:#83aac0 url(<?php echo BASE_URL; ?>apps.min/helper/login/background.jpg) center top no-repeat;">
+<body style="background:#000000;">
 
 	<?php
 	if(!empty($view_multiple_store) AND !empty($data_multiple_store)){
 		?>
-		<div style="width:400px; margin:80px auto 0px;"><img src="<?php echo BASE_URL; ?>apps.min/helper/login/logo.png"></div>
+		<div style="width:400px; margin:40px auto 0px;"><img src="<?php echo BASE_URL; ?>apps.min/helper/login/logo.png"></div>
 		<?php
 	}else{
 		?>
-		<div style="width:450px; margin:100px auto 0px;"><img src="<?php echo BASE_URL; ?>apps.min/helper/login/logo.png"></div>
+		<div style="width:400px; margin:50px auto 0px;"><img src="<?php echo BASE_URL; ?>apps.min/helper/login/logo.png"></div>
 		<?php
 	}
 	?>
@@ -300,7 +300,7 @@
 		}],
 		listeners : {
 			show : function (window, eOpts) {
-				window.alignTo(document.body, 't', [-150,320]);
+				window.alignTo(document.body, 't', [-150,220]);
 			},
 		}
 		
@@ -428,7 +428,7 @@
 
 	  const that = this;
 
-	  navigator.serviceWorker.register(appUrl+'sw-wepos.js')
+	  navigator.serviceWorker.register(appUrl+'sw-SPOS.js')
 		.then(function(reg) {
 		  console.info('SW ok');
 
@@ -527,8 +527,8 @@
 	}
 
 	</script>	
-	<!-- Start of wepos Zendesk Widget script -->
+	<!-- Start of SPOS Zendesk Widget script -->
 	<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=070b419f-4ff0-414d-9bee-29eb623a28b5"> </script>
-	<!-- End of wepos Zendesk Widget script -->
+	<!-- End of SPOS Zendesk Widget script -->
 </body>
 </html>

@@ -3352,6 +3352,18 @@ class BillingCashier extends MY_Controller {
 		$this->mfitur->updateTotalGuest();
 		
 	}
+
+	public function updateTotalCrew(){
+		
+		$this->mfitur->updateTotalCrew();
+		
+	}
+
+	public function updateTotalGh(){
+		
+		$this->mfitur->updateTotalGh();
+		
+	}
 		
 	public function updateBillInfo(){
 		

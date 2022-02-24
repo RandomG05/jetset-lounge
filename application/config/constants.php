@@ -2,10 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 /*
 |--------------------------------------------------------------------------
-| WEPOS CONSTANT
+| SPOS CONSTANT
 |--------------------------------------------------------------------------
 |
-| These constants use by wepos
+| These constants use by SPOS
 |
 */
 

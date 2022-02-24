@@ -33,16 +33,16 @@ $printer_pin = trim(str_replace("CHAR", "", $printer_pin));
 
 $align_text = array('[align=0','[align=1','[align=2');
 $size_text = array('[size=0','[size=1','[size=2','[size=2');
-$settab_text = array('[set_tab1','[set_tab2','[set_tab3','[set_tab1a','[set_tab1b','[tab');
+$settab_text = array('[set_tab1','[set_tab2','[set_tab2b' ,'[set_tab3','[set_tab1a','[set_tab1b','[tab');
 $set_tab = array();
 $set_tab_pxl = array();
 
 $set_width = array(
-	'32' => 192,
-	'40' => 240,
-	'42' => 252,
-	'46' => 276,
-	'48' => 288,
+	'32' => 384,
+	'40' => 480,
+	'42' => 504,
+	'46' => 552,
+	'48' => 576,
 );	
 
 //CHAR PIN
@@ -123,7 +123,7 @@ $set_tab[48] = array(
 				1, 5, 27, 37
 			),
 	'2' => array(
-				1, 18, 36
+				1, 36, 72
 			),
 	'3' => array(
 				1, 2, 36
@@ -133,6 +133,9 @@ $set_tab[48] = array(
 			),	
 	'5' => array(
 				1, 34
+			),
+	'6' => array(
+				1, 36, 72, 101, 136, 172
 			)
 );
 
@@ -223,6 +226,9 @@ $set_tab_chr[48] = array(
 			),	
 	'5' => array(
 				33, 15
+			),
+	'6' => array(
+				17, 18, 13, 17, 18, 13
 			)
 );
 
@@ -300,10 +306,10 @@ $set_tab_pxl[46] = array(
 
 $set_tab_pxl[48] = array(
 	'1' => array(
-				24, 132, 60, 72
+				48, 264, 120, 144
 			),
 	'2' => array(
-				102, 108, 78
+				204, 216, 156
 			),
 	'3' => array(
 				6, 204, 78
@@ -313,7 +319,10 @@ $set_tab_pxl[48] = array(
 			),	
 	'5' => array(
 				198, 90
-			)
+			),
+	'6' => array(
+				102, 108, 102, 264	
+	)
 );
 
 $curr_settab = '';
@@ -345,9 +354,12 @@ if(!empty($set_tab[$printer_pin])){
 			$print_logo_image = 'logo-default.png';
 		}
 		?>
-		<center>
+		<left>
 			<img height="100" src="<?php echo base_url(); ?>assets/resources/client_logo/<?php echo $print_logo_image; ?>">
-		</center>
+	</left>
+		<right>
+			<img height="100" src="<?php echo base_url(); ?>assets/resources/signature.png" style="height: 75px; width:300px; float:right;">
+	</right>
 		<?php
 	}
 
@@ -439,6 +451,9 @@ if(!empty($set_tab[$printer_pin])){
 					}
 					if($dt_exp == '[set_tab1b'){
 						$curr_settab_text = 5;
+					}
+					if($dt_exp == '[set_tab2b'){
+						$curr_settab_text = 6;
 					}
 					
 					$dt_exp = '';

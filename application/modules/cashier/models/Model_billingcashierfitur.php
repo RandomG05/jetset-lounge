@@ -86,12 +86,18 @@ class Model_BillingCashierFitur extends DB_Model {
 		$card_no = $this->input->post('card_no', true);
 		$billing_notes = $this->input->post('billing_notes', true);
 		$qc_notes = $this->input->post('qc_notes', true);
+		$time_inn = $this->input->post('time_in', true);
+		$time_in = date("d-m-Y H:i:s", strtotime($this->input->post('time_in', true)));
 		$single_rate = $this->input->post('single_rate', true);
 		$sales_id = $this->input->post('sales_id', true);
 		$sales_price = $this->input->post('sales_price', true);
 		$sales_percentage = $this->input->post('sales_percentage', true);
 		$sales_type = $this->input->post('sales_type', true);
 		$customer_id = $this->input->post('customer_id', true);
+		$total_guest = $this->input->post('total_guest', true);
+		$total_crew = $this->input->post('total_crew', true);
+		$total_gh = $this->input->post('total_gh', true);
+		$signature = $this->input->post('signature', true);
 		
 		$update_data = array(
 			'payment_id'	=> $payment_id,
@@ -99,12 +105,17 @@ class Model_BillingCashierFitur extends DB_Model {
 			'card_no'		=> $card_no,
 			'billing_notes'	=> $billing_notes,
 			'qc_notes'		=> $qc_notes,
+			'time_in'		=> $time_in,
 			'single_rate'	=> $single_rate,
 			'sales_id'		=> $sales_id,
 			'sales_price'		=> $sales_price,
 			'sales_percentage'	=> $sales_percentage,
 			'sales_type'		=> $sales_type,
 			'customer_id'	=> $customer_id,
+			'total_guest'	=> $total_guest,
+			'total_crew'	=> $total_crew,
+			'total_gh'		=> $total_gh,
+			'signature'		=> $signature
 		);
 		
 		$r = array('success' => false);
@@ -662,6 +673,155 @@ class Model_BillingCashierFitur extends DB_Model {
 			
 			$r['billingData'] = $getBilling;
 		}
+		
+		die(json_encode($r));
+	}
+
+	public function updateTotalCrew(){
+		
+		$session_user = $this->session->userdata('user_username');
+		$id_user = $this->session->userdata('id_user');
+		$ip_addr = get_client_ip();
+		if(empty($session_user)){
+			$r = array('success' => false, 'info' => 'Sesi Login sudah habis, Silahkan Login ulang!');
+			echo json_encode($r);
+			die();
+		}
+		
+		$this->table = $this->prefix.'billing';			
+		$billing_id = $this->input->post('billing_id', true);
+		$total_crew = $this->input->post('total_crew', true);
+		
+		$r = array('success' => false);
+			
+		$billingData = array();
+		$this->db->where("id", $billing_id);
+		$getBilling = $this->db->get($this->table);
+		if($getBilling->num_rows() > 0){
+			$billingData = $getBilling->row();
+		}
+		
+		$data_total_crew = array(
+			'total_crew' => $total_crew
+		);
+		
+		//CLOSING DATE
+		$var_closing = array(
+			'xdate'	=> $billingData->created,
+			'xtipe'	=> 'sales'
+		);
+		$is_closing = is_closing($var_closing);
+		if($is_closing){
+			$r = array('success' => false, 'info' => 'Transaksi Penjualan pada tanggal tersebut sudah ditutup!'); 
+			die(json_encode($r));
+		}
+				
+		//UPDATE OPTIONS
+		$this->db->update($this->table, $data_total_crew, "id = '".$billing_id."'");
+		
+		$r = array('success' => true );
+		
+		$getBilling = getBilling($billing_id);	
+		$update_billing = calculateBilling($billing_id);
+		if(!empty($update_billing)){
+	
+			$getBilling->total_billing = $update_billing['total_billing'];
+			$getBilling->tax_total = $update_billing['tax_total'];
+			$getBilling->service_total = $update_billing['service_total'];
+			$getBilling->discount_total = $update_billing['discount_total'];
+			$getBilling->grand_total = $update_billing['grand_total'];
+			$getBilling->total_pembulatan = $update_billing['total_pembulatan'];
+			$getBilling->total_dp = $update_billing['total_dp'];
+			$getBilling->compliment_total = $update_billing['compliment_total'];
+			$getBilling->compliment_total_tax_service = $update_billing['compliment_total_tax_service'];
+			$getBilling->total_billing_display = $update_billing['total_billing_display'];
+			
+			$getBilling->total_billing_show =  priceFormat($getBilling->total_billing);
+			$getBilling->tax_total_show =  priceFormat($getBilling->tax_total);
+			$getBilling->service_total_show =  priceFormat($getBilling->service_total);
+			$getBilling->discount_total_show =  priceFormat($getBilling->discount_total);
+			$getBilling->grand_total_show =  priceFormat($getBilling->grand_total);
+			$getBilling->total_pembulatan_show =  priceFormat($getBilling->total_pembulatan);
+			$getBilling->total_dp_show =  priceFormat($getBilling->total_dp);
+			$getBilling->compliment_total_show =  priceFormat($getBilling->compliment_total);
+			$getBilling->compliment_total_tax_service_show =  priceFormat($getBilling->compliment_total_tax_service);
+			
+			$r['billingData'] = $getBilling;
+		}
+		die(json_encode($r));
+	}
+
+	public function updateTotalGh(){
+		
+		$session_user = $this->session->userdata('user_username');
+		$id_user = $this->session->userdata('id_user');
+		$ip_addr = get_client_ip();
+		if(empty($session_user)){
+			$r = array('success' => false, 'info' => 'Sesi Login sudah habis, Silahkan Login ulang!');
+			echo json_encode($r);
+			die();
+		}
+		
+		$this->table = $this->prefix.'billing';			
+		$billing_id = $this->input->post('billing_id', true);
+		$total_gh = $this->input->post('total_gh', true);
+		
+		$r = array('success' => false);
+
+		$billingData = array();
+		$this->db->where("id", $billing_id);
+		$getBilling = $this->db->get($this->table);
+		if($getBilling->num_rows() > 0){
+			$billingData = $getBilling->row();
+		}
+		
+		$data_total_gh = array(
+			'total_gh' => $total_gh
+		);
+		
+		//CLOSING DATE
+		$var_closing = array(
+			'xdate'	=> $billingData->created,
+			'xtipe'	=> 'sales'
+		);
+		$is_closing = is_closing($var_closing);
+		if($is_closing){
+			$r = array('success' => false, 'info' => 'Transaksi Penjualan pada tanggal tersebut sudah ditutup!'); 
+			die(json_encode($r));
+		}
+				
+		//UPDATE OPTIONS
+		$this->db->update($this->table, $data_total_gh, "id = '".$billing_id."'");
+		
+		$r = array('success' => true );
+		
+		$getBilling = getBilling($billing_id);	
+		$update_billing = calculateBilling($billing_id);
+		if(!empty($update_billing)){
+	
+			$getBilling->total_billing = $update_billing['total_billing'];
+			$getBilling->tax_total = $update_billing['tax_total'];
+			$getBilling->service_total = $update_billing['service_total'];
+			$getBilling->discount_total = $update_billing['discount_total'];
+			$getBilling->grand_total = $update_billing['grand_total'];
+			$getBilling->total_pembulatan = $update_billing['total_pembulatan'];
+			$getBilling->total_dp = $update_billing['total_dp'];
+			$getBilling->compliment_total = $update_billing['compliment_total'];
+			$getBilling->compliment_total_tax_service = $update_billing['compliment_total_tax_service'];
+			$getBilling->total_billing_display = $update_billing['total_billing_display'];
+			
+			$getBilling->total_billing_show =  priceFormat($getBilling->total_billing);
+			$getBilling->tax_total_show =  priceFormat($getBilling->tax_total);
+			$getBilling->service_total_show =  priceFormat($getBilling->service_total);
+			$getBilling->discount_total_show =  priceFormat($getBilling->discount_total);
+			$getBilling->grand_total_show =  priceFormat($getBilling->grand_total);
+			$getBilling->total_pembulatan_show =  priceFormat($getBilling->total_pembulatan);
+			$getBilling->total_dp_show =  priceFormat($getBilling->total_dp);
+			$getBilling->compliment_total_show =  priceFormat($getBilling->compliment_total);
+			$getBilling->compliment_total_tax_service_show =  priceFormat($getBilling->compliment_total_tax_service);
+			
+		}
+		$r['billingData'] = $getBilling;
 		
 		die(json_encode($r));
 	}

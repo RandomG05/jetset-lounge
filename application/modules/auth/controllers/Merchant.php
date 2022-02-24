@@ -129,9 +129,9 @@ class Merchant extends MX_Controller {
 					if(!empty($data['cloud_data']['merchant_tipe'])){
 						if($data['cloud_data']['merchant_tipe'] == 'retail'){
 							if(!empty($from_apps)){
-								redirect('https://retail.wepos.id/m-apps/'.$mkey, 'refresh');
+								redirect('https://retail.SPOS.id/m-apps/'.$mkey, 'refresh');
 							}else{
-								redirect('https://retail.wepos.id/m/'.$mkey, 'refresh');
+								redirect('https://retail.SPOS.id/m/'.$mkey, 'refresh');
 							}
 							die();
 						}

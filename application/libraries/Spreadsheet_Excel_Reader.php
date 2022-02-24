@@ -465,26 +465,26 @@ class Spreadsheet_Excel_Reader
             switch ($code) {
                 case SPREADSHEET_EXCEL_READER_TYPE_SST:
                     //echo "Type_SST\n";
-                     $spos = $pos + 4;
-                     $limitpos = $spos + $length;
-                     $uniqueStrings = $this->_GetInt4d($this->data, $spos+4);
-                                                $spos += 8;
+                     $SPOS = $pos + 4;
+                     $limitpos = $SPOS + $length;
+                     $uniqueStrings = $this->_GetInt4d($this->data, $SPOS+4);
+                                                $SPOS += 8;
                                        for ($i = 0; $i < $uniqueStrings; $i++) {
         // Read in the number of characters
-                                                if ($spos == $limitpos) {
-                                                $opcode = ord($this->data[$spos]) | ord($this->data[$spos+1])<<8;
-                                                $conlength = ord($this->data[$spos+2]) | ord($this->data[$spos+3])<<8;
+                                                if ($SPOS == $limitpos) {
+                                                $opcode = ord($this->data[$SPOS]) | ord($this->data[$SPOS+1])<<8;
+                                                $conlength = ord($this->data[$SPOS+2]) | ord($this->data[$SPOS+3])<<8;
                                                         if ($opcode != 0x3c) {
                                                                 return -1;
                                                         }
-                                                $spos += 4;
-                                                $limitpos = $spos + $conlength;
+                                                $SPOS += 4;
+                                                $limitpos = $SPOS + $conlength;
                                                 }
-                                                $numChars = ord($this->data[$spos]) | (ord($this->data[$spos+1]) << 8);
+                                                $numChars = ord($this->data[$SPOS]) | (ord($this->data[$SPOS+1]) << 8);
                                                 //echo "i = $i pos = $pos numChars = $numChars ";
-                                                $spos += 2;
-                                                $optionFlags = ord($this->data[$spos]);
-                                                $spos++;
+                                                $SPOS += 2;
+                                                $optionFlags = ord($this->data[$SPOS]);
+                                                $SPOS++;
                                         $asciiEncoding = (($optionFlags & 0x01) == 0) ;
                                                 $extendedString = ( ($optionFlags & 0x04) != 0);
 
@@ -493,53 +493,53 @@ class Spreadsheet_Excel_Reader
 
                                                 if ($richString) {
                                         // Read in the crun
-                                                        $formattingRuns = ord($this->data[$spos]) | (ord($this->data[$spos+1]) << 8);
-                                                        $spos += 2;
+                                                        $formattingRuns = ord($this->data[$SPOS]) | (ord($this->data[$SPOS+1]) << 8);
+                                                        $SPOS += 2;
                                                 }
 
                                                 if ($extendedString) {
                                                   // Read in cchExtRst
-                                                  $extendedRunLength = $this->_GetInt4d($this->data, $spos);
-                                                  $spos += 4;
+                                                  $extendedRunLength = $this->_GetInt4d($this->data, $SPOS);
+                                                  $SPOS += 4;
                                                 }
 
                                                 $len = ($asciiEncoding)? $numChars : $numChars*2;
-                                                if ($spos + $len < $limitpos) {
-                                                                $retstr = substr($this->data, $spos, $len);
-                                                                $spos += $len;
+                                                if ($SPOS + $len < $limitpos) {
+                                                                $retstr = substr($this->data, $SPOS, $len);
+                                                                $SPOS += $len;
                                                 }else{
                                                         // found countinue
-                                                        $retstr = substr($this->data, $spos, $limitpos - $spos);
-                                                        $bytesRead = $limitpos - $spos;
+                                                        $retstr = substr($this->data, $SPOS, $limitpos - $SPOS);
+                                                        $bytesRead = $limitpos - $SPOS;
                                                         $charsLeft = $numChars - (($asciiEncoding) ? $bytesRead : ($bytesRead / 2));
-                                                        $spos = $limitpos;
+                                                        $SPOS = $limitpos;
 
                                                          while ($charsLeft > 0){
-                                                                $opcode = ord($this->data[$spos]) | ord($this->data[$spos+1])<<8;
-                                                                $conlength = ord($this->data[$spos+2]) | ord($this->data[$spos+3])<<8;
+                                                                $opcode = ord($this->data[$SPOS]) | ord($this->data[$SPOS+1])<<8;
+                                                                $conlength = ord($this->data[$SPOS+2]) | ord($this->data[$SPOS+3])<<8;
                                                                         if ($opcode != 0x3c) {
                                                                                 return -1;
                                                                         }
-                                                                $spos += 4;
-                                                                $limitpos = $spos + $conlength;
-                                                                $option = ord($this->data[$spos]);
-                                                                $spos += 1;
+                                                                $SPOS += 4;
+                                                                $limitpos = $SPOS + $conlength;
+                                                                $option = ord($this->data[$SPOS]);
+                                                                $SPOS += 1;
                                                                   if ($asciiEncoding && ($option == 0)) {
-                                                                                $len = min($charsLeft, $limitpos - $spos); // min($charsLeft, $conlength);
-                                                                    $retstr .= substr($this->data, $spos, $len);
+                                                                                $len = min($charsLeft, $limitpos - $SPOS); // min($charsLeft, $conlength);
+                                                                    $retstr .= substr($this->data, $SPOS, $len);
                                                                     $charsLeft -= $len;
                                                                     $asciiEncoding = true;
                                                                   }elseif (!$asciiEncoding && ($option != 0)){
-                                                                                $len = min($charsLeft * 2, $limitpos - $spos); // min($charsLeft, $conlength);
-                                                                    $retstr .= substr($this->data, $spos, $len);
+                                                                                $len = min($charsLeft * 2, $limitpos - $SPOS); // min($charsLeft, $conlength);
+                                                                    $retstr .= substr($this->data, $SPOS, $len);
                                                                     $charsLeft -= $len/2;
                                                                     $asciiEncoding = false;
                                                                   }elseif (!$asciiEncoding && ($option == 0)) {
                                                                 // Bummer - the string starts off as Unicode, but after the
                                                                 // continuation it is in straightforward ASCII encoding
-                                                                                $len = min($charsLeft, $limitpos - $spos); // min($charsLeft, $conlength);
+                                                                                $len = min($charsLeft, $limitpos - $SPOS); // min($charsLeft, $conlength);
                                                                         for ($j = 0; $j < $len; $j++) {
-                                                                 $retstr .= $this->data[$spos + $j].chr(0);
+                                                                 $retstr .= $this->data[$SPOS + $j].chr(0);
                                                                 }
                                                             $charsLeft -= $len;
                                                                 $asciiEncoding = false;
@@ -549,25 +549,25 @@ class Spreadsheet_Excel_Reader
                                                                       $newstr = $retstr[$j].chr(0);
                                                                     }
                                                                     $retstr = $newstr;
-                                                                                $len = min($charsLeft * 2, $limitpos - $spos); // min($charsLeft, $conlength);
-                                                                    $retstr .= substr($this->data, $spos, $len);
+                                                                                $len = min($charsLeft * 2, $limitpos - $SPOS); // min($charsLeft, $conlength);
+                                                                    $retstr .= substr($this->data, $SPOS, $len);
                                                                     $charsLeft -= $len/2;
                                                                     $asciiEncoding = false;
                                                                         //echo "Izavrat\n";
                                                                   }
-                                                          $spos += $len;
+                                                          $SPOS += $len;
 
                                                          }
                                                 }
                                                 $retstr = ($asciiEncoding) ? $retstr : $this->_encodeUTF16($retstr);
 //                                              echo "Str $i = $retstr\n";
                                         if ($richString){
-                                                  $spos += 4 * $formattingRuns;
+                                                  $SPOS += 4 * $formattingRuns;
                                                 }
 
                                                 // For extended strings, skip over the extended string data
                                                 if ($extendedString) {
-                                                  $spos += $extendedRunLength;
+                                                  $SPOS += $extendedRunLength;
                                                 }
                                                         //if ($retstr == 'Derby'){
                                                         //      echo "bb\n";
@@ -708,15 +708,15 @@ class Spreadsheet_Excel_Reader
      * @param todo
      * @todo fix return codes
      */
-    function _parsesheet($spos)
+    function _parsesheet($SPOS)
     {
         $cont = true;
         // read BOF
-        $code = ord($this->data[$spos]) | ord($this->data[$spos+1])<<8;
-        $length = ord($this->data[$spos+2]) | ord($this->data[$spos+3])<<8;
+        $code = ord($this->data[$SPOS]) | ord($this->data[$SPOS+1])<<8;
+        $length = ord($this->data[$SPOS+2]) | ord($this->data[$SPOS+3])<<8;
 
-        $version = ord($this->data[$spos + 4]) | ord($this->data[$spos + 5])<<8;
-        $substreamType = ord($this->data[$spos + 6]) | ord($this->data[$spos + 7])<<8;
+        $version = ord($this->data[$SPOS + 4]) | ord($this->data[$SPOS + 5])<<8;
+        $substreamType = ord($this->data[$SPOS + 6]) | ord($this->data[$SPOS + 7])<<8;
 
         if (($version != SPREADSHEET_EXCEL_READER_BIFF8) && ($version != SPREADSHEET_EXCEL_READER_BIFF7)) {
             return -1;
@@ -726,17 +726,17 @@ class Spreadsheet_Excel_Reader
             return -2;
         }
         //echo "Start parse code=".base_convert($code,10,16)." version=".base_convert($version,10,16)." substreamType=".base_convert($substreamType,10,16).""."\n";
-        $spos += $length + 4;
+        $SPOS += $length + 4;
         //var_dump($this->formatRecords);
     //echo "code $code $length";
         while($cont) {
             //echo "mem= ".memory_get_usage()."\n";
 //            $r = &$this->file->nextRecord();
-            $lowcode = ord($this->data[$spos]);
+            $lowcode = ord($this->data[$SPOS]);
             if ($lowcode == SPREADSHEET_EXCEL_READER_TYPE_EOF) break;
-            $code = $lowcode | ord($this->data[$spos+1])<<8;
-            $length = ord($this->data[$spos+2]) | ord($this->data[$spos+3])<<8;
-            $spos += 4;
+            $code = $lowcode | ord($this->data[$SPOS+1])<<8;
+            $length = ord($this->data[$SPOS+2]) | ord($this->data[$SPOS+3])<<8;
+            $SPOS += 4;
             $this->sheets[$this->sn]['maxrow'] = $this->_rowoffset - 1;
             $this->sheets[$this->sn]['maxcol'] = $this->_coloffset - 1;
             //echo "Code=".base_convert($code,10,16)." $code\n";
@@ -747,22 +747,22 @@ class Spreadsheet_Excel_Reader
                     //echo 'Type_DIMENSION ';
                     if (!isset($this->numRows)) {
                         if (($length == 10) ||  ($version == SPREADSHEET_EXCEL_READER_BIFF7)){
-                            $this->sheets[$this->sn]['numRows'] = ord($this->data[$spos+2]) | ord($this->data[$spos+3]) << 8;
-                            $this->sheets[$this->sn]['numCols'] = ord($this->data[$spos+6]) | ord($this->data[$spos+7]) << 8;
+                            $this->sheets[$this->sn]['numRows'] = ord($this->data[$SPOS+2]) | ord($this->data[$SPOS+3]) << 8;
+                            $this->sheets[$this->sn]['numCols'] = ord($this->data[$SPOS+6]) | ord($this->data[$SPOS+7]) << 8;
                         } else {
-                            $this->sheets[$this->sn]['numRows'] = ord($this->data[$spos+4]) | ord($this->data[$spos+5]) << 8;
-                            $this->sheets[$this->sn]['numCols'] = ord($this->data[$spos+10]) | ord($this->data[$spos+11]) << 8;
+                            $this->sheets[$this->sn]['numRows'] = ord($this->data[$SPOS+4]) | ord($this->data[$SPOS+5]) << 8;
+                            $this->sheets[$this->sn]['numCols'] = ord($this->data[$SPOS+10]) | ord($this->data[$SPOS+11]) << 8;
                         }
                     }
                     //echo 'numRows '.$this->numRows.' '.$this->numCols."\n";
                     break;
                 case SPREADSHEET_EXCEL_READER_TYPE_MERGEDCELLS:
-                    $cellRanges = ord($this->data[$spos]) | ord($this->data[$spos+1])<<8;
+                    $cellRanges = ord($this->data[$SPOS]) | ord($this->data[$SPOS+1])<<8;
                     for ($i = 0; $i < $cellRanges; $i++) {
-                        $fr =  ord($this->data[$spos + 8*$i + 2]) | ord($this->data[$spos + 8*$i + 3])<<8;
-                        $lr =  ord($this->data[$spos + 8*$i + 4]) | ord($this->data[$spos + 8*$i + 5])<<8;
-                        $fc =  ord($this->data[$spos + 8*$i + 6]) | ord($this->data[$spos + 8*$i + 7])<<8;
-                        $lc =  ord($this->data[$spos + 8*$i + 8]) | ord($this->data[$spos + 8*$i + 9])<<8;
+                        $fr =  ord($this->data[$SPOS + 8*$i + 2]) | ord($this->data[$SPOS + 8*$i + 3])<<8;
+                        $lr =  ord($this->data[$SPOS + 8*$i + 4]) | ord($this->data[$SPOS + 8*$i + 5])<<8;
+                        $fc =  ord($this->data[$SPOS + 8*$i + 6]) | ord($this->data[$SPOS + 8*$i + 7])<<8;
+                        $lc =  ord($this->data[$SPOS + 8*$i + 8]) | ord($this->data[$SPOS + 8*$i + 9])<<8;
                         //$this->sheets[$this->sn]['mergedCells'][] = array($fr + 1, $fc + 1, $lr + 1, $lc + 1);
                         if ($lr - $fr > 0) {
                             $this->sheets[$this->sn]['cellsInfo'][$fr+1][$fc+1]['rowspan'] = $lr - $fr + 1;
@@ -776,12 +776,12 @@ class Spreadsheet_Excel_Reader
                 case SPREADSHEET_EXCEL_READER_TYPE_RK:
                 case SPREADSHEET_EXCEL_READER_TYPE_RK2:
                     //echo 'SPREADSHEET_EXCEL_READER_TYPE_RK'."\n";
-                    $row = ord($this->data[$spos]) | ord($this->data[$spos+1])<<8;
-                    $column = ord($this->data[$spos+2]) | ord($this->data[$spos+3])<<8;
-                    $rknum = $this->_GetInt4d($this->data, $spos + 6);
+                    $row = ord($this->data[$SPOS]) | ord($this->data[$SPOS+1])<<8;
+                    $column = ord($this->data[$SPOS+2]) | ord($this->data[$SPOS+3])<<8;
+                    $rknum = $this->_GetInt4d($this->data, $SPOS + 6);
                     $numValue = $this->_GetIEEE754($rknum);
                     //echo $numValue." ";
-                    if ($this->isDate($spos)) {
+                    if ($this->isDate($SPOS)) {
                         list($string, $raw) = $this->createDate($numValue);
                     }else{
                         $raw = $numValue;
@@ -795,20 +795,20 @@ class Spreadsheet_Excel_Reader
                     //echo "Type_RK $row $column $string $raw {$this->curformat}\n";
                     break;
                 case SPREADSHEET_EXCEL_READER_TYPE_LABELSST:
-                        $row        = ord($this->data[$spos]) | ord($this->data[$spos+1])<<8;
-                        $column     = ord($this->data[$spos+2]) | ord($this->data[$spos+3])<<8;
-                        $xfindex    = ord($this->data[$spos+4]) | ord($this->data[$spos+5])<<8;
-                        $index  = $this->_GetInt4d($this->data, $spos + 6);
+                        $row        = ord($this->data[$SPOS]) | ord($this->data[$SPOS+1])<<8;
+                        $column     = ord($this->data[$SPOS+2]) | ord($this->data[$SPOS+3])<<8;
+                        $xfindex    = ord($this->data[$SPOS+4]) | ord($this->data[$SPOS+5])<<8;
+                        $index  = $this->_GetInt4d($this->data, $SPOS + 6);
             //var_dump($this->sst);
                         $this->addcell($row, $column, $this->sst[$index]);
                         //echo "LabelSST $row $column $string\n";
                     break;
                 case SPREADSHEET_EXCEL_READER_TYPE_MULRK:
-                    $row        = ord($this->data[$spos]) | ord($this->data[$spos+1])<<8;
-                    $colFirst   = ord($this->data[$spos+2]) | ord($this->data[$spos+3])<<8;
-                    $colLast    = ord($this->data[$spos + $length - 2]) | ord($this->data[$spos + $length - 1])<<8;
+                    $row        = ord($this->data[$SPOS]) | ord($this->data[$SPOS+1])<<8;
+                    $colFirst   = ord($this->data[$SPOS+2]) | ord($this->data[$SPOS+3])<<8;
+                    $colLast    = ord($this->data[$SPOS + $length - 2]) | ord($this->data[$SPOS + $length - 1])<<8;
                     $columns    = $colLast - $colFirst + 1;
-                    $tmppos = $spos+4;
+                    $tmppos = $SPOS+4;
                     for ($i = 0; $i < $columns; $i++) {
                         $numValue = $this->_GetIEEE754($this->_GetInt4d($this->data, $tmppos + 2));
                         if ($this->isDate($tmppos-4)) {
@@ -831,10 +831,10 @@ class Spreadsheet_Excel_Reader
 
                     break;
                 case SPREADSHEET_EXCEL_READER_TYPE_NUMBER:
-                    $row    = ord($this->data[$spos]) | ord($this->data[$spos+1])<<8;
-                    $column = ord($this->data[$spos+2]) | ord($this->data[$spos+3])<<8;
-                    $tmp = unpack("ddouble", substr($this->data, $spos + 6, 8)); // It machine machine dependent
-                    if ($this->isDate($spos)) {
+                    $row    = ord($this->data[$SPOS]) | ord($this->data[$SPOS+1])<<8;
+                    $column = ord($this->data[$SPOS+2]) | ord($this->data[$SPOS+3])<<8;
+                    $tmp = unpack("ddouble", substr($this->data, $SPOS + 6, 8)); // It machine machine dependent
+                    if ($this->isDate($SPOS)) {
                         list($string, $raw) = $this->createDate($tmp['double']);
                      //   $this->addcell(DateRecord($r, 1));
                     }else{
@@ -842,7 +842,7 @@ class Spreadsheet_Excel_Reader
                         if (isset($this->_columnsFormat[$column + 1])){
                                 $this->curformat = $this->_columnsFormat[$column + 1];
                         }
-                        $raw = $this->createNumber($spos);
+                        $raw = $this->createNumber($SPOS);
                         $string = sprintf($this->curformat, $raw * $this->multiplier);
 
                      //   $this->addcell(NumberRecord($r));
@@ -852,21 +852,21 @@ class Spreadsheet_Excel_Reader
                     break;
                 case SPREADSHEET_EXCEL_READER_TYPE_FORMULA:
                 case SPREADSHEET_EXCEL_READER_TYPE_FORMULA2:
-                    $row    = ord($this->data[$spos]) | ord($this->data[$spos+1])<<8;
-                    $column = ord($this->data[$spos+2]) | ord($this->data[$spos+3])<<8;
-                    if ((ord($this->data[$spos+6])==0) && (ord($this->data[$spos+12])==255) && (ord($this->data[$spos+13])==255)) {
+                    $row    = ord($this->data[$SPOS]) | ord($this->data[$SPOS+1])<<8;
+                    $column = ord($this->data[$SPOS+2]) | ord($this->data[$SPOS+3])<<8;
+                    if ((ord($this->data[$SPOS+6])==0) && (ord($this->data[$SPOS+12])==255) && (ord($this->data[$SPOS+13])==255)) {
                         //String formula. Result follows in a STRING record
                         //echo "FORMULA $row $column Formula with a string<br>\n";
-                    } elseif ((ord($this->data[$spos+6])==1) && (ord($this->data[$spos+12])==255) && (ord($this->data[$spos+13])==255)) {
+                    } elseif ((ord($this->data[$SPOS+6])==1) && (ord($this->data[$SPOS+12])==255) && (ord($this->data[$SPOS+13])==255)) {
                         //Boolean formula. Result is in +2; 0=false,1=true
-                    } elseif ((ord($this->data[$spos+6])==2) && (ord($this->data[$spos+12])==255) && (ord($this->data[$spos+13])==255)) {
+                    } elseif ((ord($this->data[$SPOS+6])==2) && (ord($this->data[$SPOS+12])==255) && (ord($this->data[$SPOS+13])==255)) {
                         //Error formula. Error code is in +2;
-                    } elseif ((ord($this->data[$spos+6])==3) && (ord($this->data[$spos+12])==255) && (ord($this->data[$spos+13])==255)) {
+                    } elseif ((ord($this->data[$SPOS+6])==3) && (ord($this->data[$SPOS+12])==255) && (ord($this->data[$SPOS+13])==255)) {
                         //Formula result is a null string.
                     } else {
                         // result is a number, so first 14 bytes are just like a _NUMBER record
-                        $tmp = unpack("ddouble", substr($this->data, $spos + 6, 8)); // It machine machine dependent
-                        if ($this->isDate($spos)) {
+                        $tmp = unpack("ddouble", substr($this->data, $SPOS + 6, 8)); // It machine machine dependent
+                        if ($this->isDate($SPOS)) {
                             list($string, $raw) = $this->createDate($tmp['double']);
                          //   $this->addcell(DateRecord($r, 1));
                         }else{
@@ -874,7 +874,7 @@ class Spreadsheet_Excel_Reader
                             if (isset($this->_columnsFormat[$column + 1])){
                                     $this->curformat = $this->_columnsFormat[$column + 1];
                             }
-                            $raw = $this->createNumber($spos);
+                            $raw = $this->createNumber($SPOS);
                             $string = sprintf($this->curformat, $raw * $this->multiplier);
 
                          //   $this->addcell(NumberRecord($r));
@@ -884,9 +884,9 @@ class Spreadsheet_Excel_Reader
                     }
                     break;
                 case SPREADSHEET_EXCEL_READER_TYPE_BOOLERR:
-                    $row    = ord($this->data[$spos]) | ord($this->data[$spos+1])<<8;
-                    $column = ord($this->data[$spos+2]) | ord($this->data[$spos+3])<<8;
-                    $string = ord($this->data[$spos+6]);
+                    $row    = ord($this->data[$SPOS]) | ord($this->data[$SPOS+1])<<8;
+                    $column = ord($this->data[$SPOS+2]) | ord($this->data[$SPOS+3])<<8;
+                    $string = ord($this->data[$SPOS+6]);
                     $this->addcell($row, $column, $string);
                     //echo 'Type_BOOLERR '."\n";
                     break;
@@ -895,9 +895,9 @@ class Spreadsheet_Excel_Reader
                 case SPREADSHEET_EXCEL_READER_TYPE_MULBLANK:
                     break;
                 case SPREADSHEET_EXCEL_READER_TYPE_LABEL:
-                    $row    = ord($this->data[$spos]) | ord($this->data[$spos+1])<<8;
-                    $column = ord($this->data[$spos+2]) | ord($this->data[$spos+3])<<8;
-                    $this->addcell($row, $column, substr($this->data, $spos + 8, ord($this->data[$spos + 6]) | ord($this->data[$spos + 7])<<8));
+                    $row    = ord($this->data[$SPOS]) | ord($this->data[$SPOS+1])<<8;
+                    $column = ord($this->data[$SPOS+2]) | ord($this->data[$SPOS+3])<<8;
+                    $this->addcell($row, $column, substr($this->data, $SPOS + 8, ord($this->data[$SPOS + 6]) | ord($this->data[$SPOS + 7])<<8));
 
                    // $this->addcell(LabelRecord($r));
                     break;
@@ -910,7 +910,7 @@ class Spreadsheet_Excel_Reader
                     break;
 
             }
-            $spos += $length;
+            $SPOS += $length;
         }
 
         if (!isset($this->sheets[$this->sn]['numRows']))
@@ -926,10 +926,10 @@ class Spreadsheet_Excel_Reader
      * @param todo
      * @return boolean True if date, false otherwise
      */
-    function isDate($spos)
+    function isDate($SPOS)
     {
         //$xfindex = GetInt2d(, 4);
-        $xfindex = ord($this->data[$spos+4]) | ord($this->data[$spos+5]) << 8;
+        $xfindex = ord($this->data[$SPOS+4]) | ord($this->data[$SPOS+5]) << 8;
         //echo 'check is date '.$xfindex.' '.$this->formatRecords['xfrecords'][$xfindex]['type']."\n";
         //var_dump($this->formatRecords['xfrecords'][$xfindex]);
         if ($this->formatRecords['xfrecords'][$xfindex]['type'] == 'date') {
@@ -982,11 +982,11 @@ class Spreadsheet_Excel_Reader
         return array($string, $raw);
     }
 
-    function createNumber($spos)
+    function createNumber($SPOS)
     {
-        $rknumhigh = $this->_GetInt4d($this->data, $spos + 10);
-        $rknumlow = $this->_GetInt4d($this->data, $spos + 6);
-        //for ($i=0; $i<8; $i++) { echo ord($this->data[$i+$spos+6]) . " "; } echo "<br>";
+        $rknumhigh = $this->_GetInt4d($this->data, $SPOS + 10);
+        $rknumlow = $this->_GetInt4d($this->data, $SPOS + 6);
+        //for ($i=0; $i<8; $i++) { echo ord($this->data[$i+$SPOS+6]) . " "; } echo "<br>";
         $sign = ($rknumhigh & 0x80000000) >> 31;
         $exp =  ($rknumhigh & 0x7ff00000) >> 20;
         $mantissa = (0x100000 | ($rknumhigh & 0x000fffff));
