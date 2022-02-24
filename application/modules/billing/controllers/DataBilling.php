@@ -320,10 +320,10 @@ class DataBilling extends MY_Controller {
 				
 					if($billing_status == 'paid'){
 						//$params['where'][] = "(a.payment_date >= '".$qdate_from." 00:00:01' AND a.payment_date <= '".$qdate_till_max." 06:00:00')";
-						$params['where'][] = "(a.payment_date >= '".$qdate_from."' AND a.payment_date <= '".$qdate_till_max."')";
+						$params['where'][] = "0 != 1";
 					}else{
 						//$params['where'][] = "(a.updated >= '".$qdate_from." 00:00:01' AND a.updated <= '".$qdate_till_max." 06:00:00')";
-						$params['where'][] = "(a.updated >= '".$qdate_from."' AND a.updated <= '".$qdate_till_max."')";
+						$params['where'][] = "0 != 1";
 					}
 					
 					
