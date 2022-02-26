@@ -300,7 +300,7 @@
 		}],
 		listeners : {
 			show : function (window, eOpts) {
-				window.alignTo(document.body, 't', [-150,220]);
+				window.alignTo(document.body, 't', [-130,300]);
 			},
 		}
 		
