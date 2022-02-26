@@ -31,7 +31,7 @@
 		}
 	</style>
 </head>
-<body style="background:#000000;">
+<body style="background:#83aac0 url(<?php echo BASE_URL; ?>apps.min/helper/login/background.jpg) center top no-repeat;">
 
 	<?php
 	if(!empty($view_multiple_store) AND !empty($data_multiple_store)){
