@@ -1256,7 +1256,7 @@ class Model_BillingCashierPrint extends DB_Model {
 						
 						$total_pax = $billingData->total_guest + $billingData->total_crew + $billingData->total_gh;
 						$total_pax*=150000;
-						$subtotal += $order_total + $total_pax;
+						$subtotal += $order_total;
 						$tax_total += $bil_det->tax_total;
 						$service_total += $bil_det->service_total;
 						$discount_total += $bil_det->discount_total;
