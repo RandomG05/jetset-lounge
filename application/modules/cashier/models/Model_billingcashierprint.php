@@ -1533,13 +1533,9 @@ class Model_BillingCashierPrint extends DB_Model {
 					"{crew}"=>$billingData->total_crew,
 					"{gh}"=>$billingData->total_gh,
 					"{compliment}"=> $compliment_total_show,
-					"{pax_price}"=>priceFormat(150000),
-					"{crew_price}"=>priceFormat(150000),
-					"{gh_price}"=>priceFormat(150000),
-					"{pax_total}"=>priceFormat(150000*$billingData->total_guest),
-					"{crew_total}"=>priceFormat(150000*$billingData->total_crew),
-					"{gh_total}"=>priceFormat(150000*$billingData->total_gh)
-					//"{cust_sign}"=>$billingData->signature
+					"{gh_total}"=>priceFormat(150000*$billingData->total_gh),
+					"{cust_sign}"=>$billingData->signature
+					"{additional_fee}"=>$billingData->additional_fee,
 				);
 				
 				//DATE PAID
