@@ -344,7 +344,7 @@ if(!empty($set_tab[$printer_pin])){
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url().'apps.min/helper/reports/report.css'; ?>"/>	
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url().'apps.min/helper/reports/report.css'; ?>" media="print"/>
 	</head>
-<body>
+<body style="background:<?php echo base_url().'assets/resources/paid.jpg'; ?>">
 <div class="report_area" style="font-size:12px; padding:0px; margin:0px auto; text-align:left; border:0px solid #ccc; width:<?php echo $set_width[$printer_pin].'px'; ?>;">
 	<?php
 	//if($data_printer['print_logo'] == 1 OR $print_logo == 1){
@@ -355,6 +355,7 @@ if(!empty($set_tab[$printer_pin])){
 		}
 		?>
 		<left>
+			<span><?php echo $billingData->billing_status;?></span>
 			<img height="100" src="<?php echo base_url(); ?>assets/resources/client_logo/<?php echo $print_logo_image; ?>">
 	</left>
 		<?php

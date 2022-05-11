@@ -97,6 +97,7 @@ class Model_BillingCashierFitur extends DB_Model {
 		$total_guest = $this->input->post('total_guest', true);
 		$total_crew = $this->input->post('total_crew', true);
 		$total_gh = $this->input->post('total_gh', true);
+		$additional_fee = $this->input->post('additional_fee', true);
 		$signature = $this->input->post('signature', true);
 		
 		$update_data = array(
@@ -115,6 +116,7 @@ class Model_BillingCashierFitur extends DB_Model {
 			'total_guest'	=> $total_guest,
 			'total_crew'	=> $total_crew,
 			'total_gh'		=> $total_gh,
+			'additional_fee'=> $additional_fee,
 			'signature'		=> $signature
 		);
 		

@@ -959,6 +959,9 @@ class BillingCashier extends MY_Controller {
 		$package_item = $this->input->post('package_item');
 		$use_stok_kode_unik = $this->input->post('use_stok_kode_unik');
 		$data_stok_kode_unik = $this->input->post('data_stok_kode_unik');
+
+		$customer_id = $this->input->post('customer_id');
+		$route = $this->input->post('route');
 		
 		//EDIT ID
 		$id = $this->input->post('id', true);
@@ -1454,6 +1457,10 @@ class BillingCashier extends MY_Controller {
 				),
 				'table'		=>  $this->table2
 			);
+			$var2 = array(
+				'customer_id'			=> $customer_id,
+				'qc_notes'				=> $route,
+			);
 
 			$default_package = array();
 			if($product_type == 'package'){
@@ -1516,6 +1523,7 @@ class BillingCashier extends MY_Controller {
 			//SAVE
 			$insert_id = false;
 			$this->lib_trans->begin();
+				$this->db->update($this->table, $var2, "id = '".$main_billing_id."'");
 				$q = $this->mdetail->add($var);
 				$insert_id = $this->mdetail->get_insert_id();
 			$this->lib_trans->commit();			

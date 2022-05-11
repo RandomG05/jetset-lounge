@@ -134,7 +134,7 @@ if(!function_exists('getBilling')){
 					'updated'		=>	$date_now,
 					'updatedby'		=>	$session_user,
 					'shift'			=>	$shift,
-					'total_guest'	=> 0,
+					'total_guest'	=> 1,
 					'total_crew'	=> 0,
 					'total_gh'		=> 0,
 				),
@@ -166,8 +166,8 @@ if(!function_exists('getBilling')){
 		//update-2001.002
 		$billingData = array();
 		$scope->db->select('a.id, a.table_id, a.table_no, a.billing_no, a.payment_date,
-			a.billing_status, a.billing_notes, a.total_pembulatan, a.total_billing, a.grand_total, a.total_paid, a.payment_id, a.bank_id,
-			a.card_no, a.include_tax, a.tax_percentage, a.tax_total, a.include_service, a.service_percentage, a.service_total, 
+			a.billing_status, a.billing_notes, a.total_pembulatan, a.additional_fee, a.total_billing, a.grand_total, a.total_paid, a.payment_id, a.bank_id,
+			a.card_no, a.include_tax, a.tax_percentage, a.tax_total, a.include_service, a.service_percentage, a.service_total, a.additional_fee,
 			a.discount_id, a.discount_notes, a.discount_percentage, a.discount_price, a.discount_total, a.total_hpp, 
 			a.is_active, a.total_dp, a.compliment_total, a.total_cash, a.total_credit, a.createdby, a.updatedby, 
 			a.merge_id, a.merge_main_status, a.split_from_id, a.total_guest, a.total_crew, a.total_gh, a.signature, a.lock_billing, a.qc_notes,
@@ -563,7 +563,7 @@ if(!function_exists('calculateBilling')){
 			if(!empty($billing_id)){
 				$scope->db->select("id, takeaway_no_tax, takeaway_no_service, 
 				is_compliment, total_dp, discount_perbilling, discount_total,
-				include_tax, include_service, tax_percentage, service_percentage, diskon_sebelum_pajak_service");
+				include_tax, include_service, tax_percentage, service_percentage, additional_fee, diskon_sebelum_pajak_service");
 				$scope->db->from($scope->table_billing);
 				$scope->db->where("id", $billing_id);
 				$get_billing = $scope->db->get();
@@ -925,6 +925,8 @@ if(!function_exists('calculateBilling')){
 				
 				
 			}
+			//ADDITIONAL FEES
+			$grand_total_all += $billingData->additional_fee;
 			
 			//DP
 			$total_dp = $billingData->total_dp;
