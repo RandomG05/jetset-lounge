@@ -357,7 +357,7 @@ if(!empty($set_tab[$printer_pin])){
 		<left>
 			<span><?php echo $billingData->billing_status;?></span>
 			<img height="100" src="<?php echo base_url(); ?>assets/resources/client_logo/<?php echo $print_logo_image; ?>">
-		</left>
+	</left>
 		<?php
 	}
 
