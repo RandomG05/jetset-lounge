@@ -782,12 +782,12 @@ class ReceivingList extends MY_Controller {
 	
 			$update_stok = '';
 			if($do_update_stok){
-				$r['info'] = 'Update Stok';
+				//$r['info'] = 'Update Stok';
 				$update_stok = 'update';
 			}
 			
 			if($do_update_rollback_stok){
-				$r['info'] = 'Re-Update Stok';
+				//$r['info'] = 'Re-Update Stok';
 				$update_stok = 'rollback';
 			}
 			

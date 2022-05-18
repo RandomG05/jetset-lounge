@@ -314,7 +314,7 @@ class Model_receivedetail extends DB_Model {
 						$all_receive_po_det_qty[$dt['po_detail_id']] = 0;
 					}
 					
-					$all_receive_po_det_qty[$dt['po_detail_id']] += ($dt['receive_det_qty'] - $receive_det_qty_before);
+					$all_receive_po_det_qty[$dt['po_detail_id']] += ((int)$dt['receive_det_qty'] - (int)$receive_det_qty_before);
 					
 					/* DEPRECATED -- USE STOCK REKAP
 					$dtUpdate_Items[] = array(
@@ -326,7 +326,7 @@ class Model_receivedetail extends DB_Model {
 					$total_qty += ($dt['receive_det_qty']);
 					
 					//check if new
-					if(strstr($dt['id'], 'new_')){
+					if(strstr($dt['id'], 'new-')){
 						unset($dt['id']);
 					}
 						
