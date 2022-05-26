@@ -962,6 +962,7 @@ class BillingCashier extends MY_Controller {
 
 		$customer_id = $this->input->post('customer_id');
 		$route = $this->input->post('route');
+		$acreg = $this->input->post('ac_reg');
 		
 		//EDIT ID
 		$id = $this->input->post('id', true);
