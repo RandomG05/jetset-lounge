@@ -99,6 +99,7 @@ class Model_BillingCashierFitur extends DB_Model {
 		$total_gh = $this->input->post('total_gh', true);
 		$additional_fee = $this->input->post('additional_fee', true);
 		$signature = $this->input->post('signature', true);
+		$ac_reg = $this->input->post('ac_reg', true);
 		
 		$update_data = array(
 			'payment_id'	=> $payment_id,
@@ -117,7 +118,8 @@ class Model_BillingCashierFitur extends DB_Model {
 			'total_crew'	=> $total_crew,
 			'total_gh'		=> $total_gh,
 			'additional_fee'=> $additional_fee,
-			'signature'		=> $signature
+			'signature'		=> $signature,
+			'ac_reg'		=> $ac_reg
 		);
 		
 		$r = array('success' => false);
@@ -843,6 +845,7 @@ class Model_BillingCashierFitur extends DB_Model {
 		$billing_id = $this->input->post('billing_id', true);
 		$total_guest = $this->input->post('total_guest', true);
 		$qc_notes = $this->input->post('qc_notes', true);
+		$ac_reg = $this->input->post('ac_reg', true);
 		
 		$r = array('success' => false);
 		
@@ -861,6 +864,7 @@ class Model_BillingCashierFitur extends DB_Model {
 				'total_guest' 	=> $total_guest,
 				'qc_notes' 		=> $qc_notes,
 				'billing_notes' => $qc_notes,
+				'ac_reg'		=> $ac_reg,
 			);
 			
 			//CLOSING DATE

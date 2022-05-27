@@ -1461,6 +1461,7 @@ class BillingCashier extends MY_Controller {
 			$var2 = array(
 				'customer_id'			=> $customer_id,
 				'qc_notes'				=> $route,
+				'ac_reg'				=> $acreg
 			);
 
 			$default_package = array();
@@ -1524,10 +1525,12 @@ class BillingCashier extends MY_Controller {
 			//SAVE
 			$insert_id = false;
 			$this->lib_trans->begin();
+			if($customer_id && $customer_id != 0) {
 				$this->db->update($this->table, $var2, "id = '".$main_billing_id."'");
-				$q = $this->mdetail->add($var);
-				$insert_id = $this->mdetail->get_insert_id();
-			$this->lib_trans->commit();			
+			}			
+			$q = $this->mdetail->add($var);
+			$insert_id = $this->mdetail->get_insert_id();
+			$this->lib_trans->commit();
 			if($q)
 			{  
 				if(!empty($billingData->id)){
@@ -1558,7 +1561,7 @@ class BillingCashier extends MY_Controller {
 			}  
 			else
 			{  
-				$r = array('success' => false);
+				$r = array('success' => false, 'info' => "THIS SHIT");
 			}
       		
 		}else
