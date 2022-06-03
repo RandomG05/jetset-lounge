@@ -204,7 +204,13 @@ class BillingCashier extends MY_Controller {
 			//logBilling($billingData, 'Create', 'Membuat Billing '.$billingData->billing_no);
 		}
 		
-		$r = array('success' => true, 'billingData' => $billingData); 
+		$r = array('success' => true, 'billingData' => $billingData);
+		if ($table_id == 1){
+			$_POST['billing_id'] = $billingData->id;
+			$_POST['form_type_orderProduct'] = 'add';
+			$this->getProductFromDB('ITEM');
+			$this->save_orderProduct();
+		}
 		echo json_encode($r);
 		die();
 	}
@@ -3812,5 +3818,53 @@ class BillingCashier extends MY_Controller {
 		echo json_encode($r);
 		die();
 	}
-	
+	public function getProductFromDB($product_name){
+		$this->table = $this->prefix.'product';
+		$this->db->select("b.*");
+		$this->db->from($this->table." as b");
+		$this->db->where("b.product_name = '".$product_name."'");
+		$res = $this->db->get();
+		foreach ($res->result() as $product) {
+			$_POST['product_id'] = $product->id;
+			$_POST['category_id'] = $product->category_id;
+			$_POST['product_price'] = $product->product_price;
+			$_POST['product_price_hpp'] = $product->product_hpp;
+			$_POST['product_normal_price'] = $product->product_price;
+			$_POST['product_price_before_promo'] = $product->product_price;
+			$_POST['product_name'] = $product->product_name;
+			$_POST['order_qty'] = 1;
+			$_POST['order_notes'] = 'Catering';
+			$_POST['product_varian_id'] = "";
+			$_POST['varian_id'] = NULL;
+			$_POST['has_varian'] = $product->has_varian;
+			$_POST['is_takeaway'] = 0;
+			$_POST['is_compliment'] = 0;
+			$_POST['is_promo'] = NULL;
+			$_POST['promo_id'] = NULL;
+			$_POST['promo_tipe'] = 0;
+			$_POST['promo_percentage'] = 0;
+			$_POST['promo_price'] = 0;
+			$_POST['promo_desc'] = "";
+			$_POST['use_tax'] = $product->use_tax;
+			$_POST['use_service'] = $product->use_service;
+			$_POST['is_kerjasama'] = $product->is_kerjasama;
+			$_POST['supplier_id'] = $product->supplier_id;
+			$_POST['persentase_bagi_hasil'] = $product->persentase_bagi_hasil;
+			$_POST['total_bagi_hasil'] = $product->total_bagi_hasil;
+			
+			$_POST['is_buyget'] = NULL;
+			$_POST['buyget_id'] = NULL;
+			$_POST['buyget_tipe'] = NULL;
+			$_POST['buyget_percentage'] = NULL;
+			$_POST['buyget_qty'] = NULL;
+			$_POST['buyget_desc'] = NULL;
+			$_POST['buyget_item'] = NULL;
+			$_POST['free_item'] = "";
+			
+			$_POST['product_type'] = $product->product_type;
+			$_POST['package_item'] = "";
+			$_POST['use_stok_kode_unik'] = NULL;
+			$_POST['data_stok_kode_unik'] = NULL;
+		}
+	}
 }
