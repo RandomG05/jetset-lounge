@@ -237,8 +237,18 @@ class ReportSales extends MY_Controller {
 			}
 			
 			$get_dt = $this->db->get();
+			$catering_bill = array();
+			$lounge_bill = array();
+			foreach($get_dt->result_array() as $row){
+				if($row['table_id'] == 2){
+					$catering_bill += $row;
+				} 
+				else{
+					$lounge_bill += $row;
+				}
+			}
 			if($get_dt->num_rows() > 0){
-				$data_post['report_data'] = $get_dt->result_array();				
+				$data_post['report_datas'] = [$catering_bill, $lounge_bill];				
 			}
 			
 			//PAYMENT DATA

@@ -205,11 +205,15 @@ class BillingCashier extends MY_Controller {
 		}
 		
 		$r = array('success' => true, 'billingData' => $billingData);
-		if ($table_id == 1){
-			$_POST['billing_id'] = $billingData->id;
+		if ($table_id == 2){
+			$_POST['main_billing_id'] = $billingData->id;
 			$_POST['form_type_orderProduct'] = 'add';
-			$this->getProductFromDB('ITEM');
-			$this->save_orderProduct();
+			$this->getProductFromDB('Dish Washing');
+			$this->save_orderProduct(1);
+			$this->getProductFromDB('Ice Cube');
+			$this->save_orderProduct(1);
+			$this->getProductFromDB('Hot Water');
+			$this->save_orderProduct(1);
 		}
 		echo json_encode($r);
 		die();
@@ -909,7 +913,7 @@ class BillingCashier extends MY_Controller {
 	}
 	
 	/*ORDER*/
-	public function save_orderProduct(){
+	public function save_orderProduct($die=NULL){
 		$this->table_billing = $this->prefix.'billing';				
 		$this->table = $this->prefix.'billing';				
 		$this->table2 = $this->prefix.'billing_detail';				
@@ -1966,7 +1970,9 @@ class BillingCashier extends MY_Controller {
 			}
 		}
 		
-		die(json_encode(($r==null or $r=='')? array('success'=>false) : $r));
+		if(!$die){
+			die(json_encode(($r==null or $r=='')? array('success'=>false) : $r));
+		}
 	}
 	
 	public function cancelOrder(){

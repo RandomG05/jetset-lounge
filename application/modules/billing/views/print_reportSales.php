@@ -110,11 +110,18 @@
 						</div>
 					</td>
 				</tr>
+			<?php foreach($report_datas as $report_data) {?>
 				<tr class="tbl-header">
 					<td class="first xcenter" width="50" rowspan="2">NO</td>
 					<td class="xcenter" width="130" rowspan="2">PAYMENT DATE</td>
 					<td class="xcenter" width="80" rowspan="2">BILLING NO.</td>
 					<td class="xcenter" width=130" rowspan="2">CUSTOMER</td>
+					<?php if($show_note == true){
+					?>
+					<td class="xcenter" width="130" rowspan="2">ROUTE</td>
+					<td class="xcenter" width="130" rowspan="2">AC / REG</td>
+					<?php
+					} ?>
 					<td class="xcenter" width="110" rowspan="2">TOTAL BILLING</td>
 					<?php
 					if($diskon_sebelum_pajak_service == 1 OR count($display_discount_type) > 1){
@@ -181,13 +188,6 @@
 						?>
 						<td class="xcenter" width="<?php echo count($payment_data)*100; ?>" colspan="<?php echo count($payment_data); ?>">PAYMENT</td>	
 						<?php
-					}
-					
-					if($show_note == true){
-					?>
-					<td class="xcenter" width="300" rowspan="2">FLIGHT NOTES</td>
-					<td class="xcenter" width="300" rowspan="2">NOTE</td>
-					<?php
 					}
 					
 					if($show_shift_kasir == true){
@@ -269,6 +269,12 @@
 							<td class="xcenter"><?php echo $det['customer_name'];
 							if(!empty($det['customer_representative'])) {
 								echo ', ' . $det['customer_representative'];} ?></td>
+							
+							<?php if($show_note == true){
+							?>
+							<td class="xcenter"><?php echo $det['qc_notes']; ?></td>
+							<td class="xcenter"><?php echo $det['ac_reg']; ?></td>
+							<?php }?>
 							<td class="xright"><?php echo $det['total_billing_show']; ?></td>
 							<?php
 							if($diskon_sebelum_pajak_service == 1 OR count($display_discount_type) > 1){
@@ -419,13 +425,6 @@
 								}
 							}
 							
-							if($show_note == true){
-							?>
-							<td class="xleft"><?php echo $det['billing_notes']; ?></td>
-							<td class="xleft"><?php echo $det['payment_note']; ?></td>
-							<?php
-							}
-							
 							if($show_shift_kasir == true){
 							?>
 							<td class="xleft"><?php echo $det['nama_shift'].'/'.$det['nama_kasir']; ?></td>
@@ -485,7 +484,7 @@
 					
 					?>
 					<tr class="tbl-total">
-						<td class="first xright xbold" colspan="<?php echo 3; ?>">TOTAL</td>
+						<td class="first xcenter xbold" colspan="<?php echo 6; ?>">TOTAL</td>
 						<td class="xright xbold"><?php echo priceFormat($total_billing); ?></td>
 						<?php
 						if($diskon_sebelum_pajak_service == 1 OR count($display_discount_type) > 1){
@@ -633,6 +632,7 @@
 					</td>
 				</tr>	
 			</tbody>
+			<?php } ?>
 		</table>
 				
 		
