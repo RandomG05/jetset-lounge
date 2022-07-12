@@ -1542,6 +1542,7 @@ class Model_BillingCashierPrint extends DB_Model {
 					"{additional_fee}"=>priceFormat($billingData->additional_fee),
 					"{cust_sign}"=>$billingData->signature,
 					"{ac_reg}"=>$billingData->ac_reg,
+					"{so_type}"=>($billingData->table_id == 1) ? 'LOUNGE' : 'CATERING'
 				);
 				
 				//DATE PAID

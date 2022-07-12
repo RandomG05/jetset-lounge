@@ -255,7 +255,6 @@
 					$total_post_nontrx = 0;
 					$grand_total_post_nontrx = 0;
 					$grand_total_post_sales = 0;
-					
 					foreach($report_data as $det){
 						
 						if(!empty($only_txmark)){

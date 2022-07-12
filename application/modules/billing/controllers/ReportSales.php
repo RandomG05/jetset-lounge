@@ -237,18 +237,8 @@ class ReportSales extends MY_Controller {
 			}
 			
 			$get_dt = $this->db->get();
-			$catering_bill = array();
-			$lounge_bill = array();
-			foreach($get_dt->result_array() as $row){
-				if($row['table_id'] == 2){
-					$catering_bill += $row;
-				} 
-				else{
-					$lounge_bill += $row;
-				}
-			}
 			if($get_dt->num_rows() > 0){
-				$data_post['report_datas'] = [$catering_bill, $lounge_bill];				
+				$data_post['report_data'] = $get_dt->result_array();				
 			}
 			
 			//PAYMENT DATA
@@ -697,6 +687,13 @@ class ReportSales extends MY_Controller {
 		}
 		
 		//DO-PRINT
+		$lounge_bill = array();
+		$catering_bill = array();
+		foreach($data_post['report_data'] as $service_order){
+			if($service_order['table_id'] == 2) {array_push($catering_bill, $service_order);}
+			else {array_push($lounge_bill, $service_order);}
+		}
+		$data_post['report_datas'] = [$lounge_bill, $catering_bill];
 		if(!empty($do)){
 			$data_post['do'] = $do;
 		}else{
