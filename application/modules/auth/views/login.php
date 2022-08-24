@@ -40,7 +40,7 @@
 		<?php
 	}else{
 		?>
-		<div style="width:400px; margin:50px auto 0px;"><img src="<?php echo BASE_URL; ?>apps.min/helper/login/logo.png"></div>
+		<div style="width:950px; margin:20px auto 0px;"><img src="<?php echo BASE_URL; ?>apps.min/helper/login/logo.png"></div>
 		<?php
 	}
 	?>
