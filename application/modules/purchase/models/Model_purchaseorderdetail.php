@@ -308,10 +308,9 @@ class Model_purchaseorderdetail extends DB_Model {
 					$this->db->update($this->prefix."ro",$updateRO_status,"id IN (".$all_RO_id_txt.")");
 				}
 				
-			}
-			
+			}			
 			return array('dtPO' => $dt_rowguid, 'dtInsert' => $dtInsert, 'dtUpdate' => $dtUpdate, 'dtDelete' => $dtDelete, 
-			'dtUpdate_RO' => $dtUpdate_RO, 'dtDelete_RO' => $dtDelete_RO);
+			'dtUpdate_RO' => $dtUpdate_RO, 'dtDelete_RO' => $dtDelete_RO, 'dtInsertRL' => $dtInsertRL);
 		}
 	}
 
