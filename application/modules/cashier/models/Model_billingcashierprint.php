@@ -1498,7 +1498,7 @@ class Model_BillingCashierPrint extends DB_Model {
 					"{date_time}"	=> date("d/m/Y H:i"),
 					"{date_time_APS}"	=> date("H:i, d/m/y"),
 					"{date_time_full}"	=> date("Y-m-d H:i:s"),
-					"{time_in}"	=> date("d-m-Y", strtotime($billingData->time_in)),
+					"{time_in}"	=> $billingData->time_in,
 					"{user}"	=> $session_user,
 					"{table_no}"	=> $table_no_receipt,
 					"{billing_no}"	=> $billing_no_receipt,
