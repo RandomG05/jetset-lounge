@@ -120,6 +120,7 @@
 					?>
 					<td class="xcenter" width="130" rowspan="2">ROUTE</td>
 					<td class="xcenter" width="130" rowspan="2">AC / REG</td>
+					<td class="xcenter" width="130" rowspan="2">PAX</td>
 					<?php
 					} ?>
 					<td class="xcenter" width="110" rowspan="2">TOTAL BILLING</td>
@@ -177,12 +178,6 @@
 					}
 					?>
 					<td class="xcenter" width="120" rowspan="2">GRAND TOTAL</td>
-					<?php
-					if($show_dp == true){
-						?>
-						<td class="xcenter" width="100" rowspan="2">DP</td>
-						<?php
-					}
 					
 					if($show_payment == true){
 						?>
@@ -447,7 +442,7 @@
 						
 						$total_billing +=  $det['total_billing'];
 						$total_tax +=  $det['tax_total'];
-						$total_service +=  $det['service_total'];
+						$total_service +=  $det['service_total']+$det['additional_fee'];
 						$grand_total +=  $det['grand_total'];
 						$grand_total_compliment += $det['total_compliment'];
 						$grand_sub_total += $det['sub_total'];
