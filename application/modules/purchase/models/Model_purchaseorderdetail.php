@@ -172,6 +172,7 @@ class Model_purchaseorderdetail extends DB_Model {
 			
 			if(!empty($dtInsert)){
 				$this->db->insert_batch($this->table, $dtInsert);
+				$first_det_id = $this->db->insert_id();
 				
 				//insert to rl
 				$dtInsertRL = array();
@@ -308,9 +309,10 @@ class Model_purchaseorderdetail extends DB_Model {
 					$this->db->update($this->prefix."ro",$updateRO_status,"id IN (".$all_RO_id_txt.")");
 				}
 				
-			}			
+			}
+			
 			return array('dtPO' => $dt_rowguid, 'dtInsert' => $dtInsert, 'dtUpdate' => $dtUpdate, 'dtDelete' => $dtDelete, 
-			'dtUpdate_RO' => $dtUpdate_RO, 'dtDelete_RO' => $dtDelete_RO, 'dtInsertRL' => $dtInsertRL);
+			'dtUpdate_RO' => $dtUpdate_RO, 'dtDelete_RO' => $dtDelete_RO, 'firstId' => $first_det_id);
 		}
 	}
 
