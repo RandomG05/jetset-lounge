@@ -86,13 +86,12 @@ class Model_BillingCashierFitur extends DB_Model {
 		$card_no = $this->input->post('card_no', true);
 		$billing_notes = $this->input->post('billing_notes', true);
 		$qc_notes = $this->input->post('qc_notes', true);
-		if($this->input->post('time_in', true)){
-			$time_in = date_create($this->input->post('time_in', true) + '00:00:00');
-			$time_in = date_format($time_in, "Y-m-d H:i:s");
+		try{
+			$time_in = strtotime($this->input->post('time_in', true));
+		}catch (Exception $e){
+			$time_in = strtotime(date('d-m-Y'));
 		}
-		else{
-			$time_in = Date("Y-m-d H:i:s");
-		}
+		$time_in = date('Y-m-d', $time_in);
 		$single_rate = $this->input->post('single_rate', true);
 		$sales_id = $this->input->post('sales_id', true);
 		$sales_price = $this->input->post('sales_price', true);

@@ -178,7 +178,7 @@
 					}
 					?>
 					<td class="xcenter" width="120" rowspan="2">GRAND TOTAL</td>
-					
+					<?php
 					if($show_payment == true){
 						?>
 						<td class="xcenter" width="<?php echo count($payment_data)*100; ?>" colspan="<?php echo count($payment_data); ?>">PAYMENT</td>	

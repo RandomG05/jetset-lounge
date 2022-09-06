@@ -1498,7 +1498,7 @@ class Model_BillingCashierPrint extends DB_Model {
 					"{date_time}"	=> date("d/m/Y H:i"),
 					"{date_time_APS}"	=> date("H:i, d/m/y"),
 					"{date_time_full}"	=> date("Y-m-d H:i:s"),
-					"{time_in}"	=> $billingData->time_in,
+					"{time_in}"	=> explode(" ", $billingData->time_in)[0],
 					"{user}"	=> $session_user,
 					"{table_no}"	=> $table_no_receipt,
 					"{billing_no}"	=> $billing_no_receipt,
@@ -1540,7 +1540,7 @@ class Model_BillingCashierPrint extends DB_Model {
 					"{crew_total}"=>priceFormat(150000*$billingData->total_crew),
 					"{gh_total}"=>priceFormat(150000*$billingData->total_gh),
 					"{additional_fee}"=>priceFormat($billingData->additional_fee),
-					"{cust_sign}"=>$billingData->signature,
+					"{cust_sign}"=>"<svg>".$billingData->signature."</svg>",
 					"{ac_reg}"=>$billingData->ac_reg,
 					"{so_type}"=>($billingData->table_id == 1) ? 'LOUNGE' : 'CATERING'
 				);
@@ -1659,7 +1659,7 @@ class Model_BillingCashierPrint extends DB_Model {
 					
 					if($data_printer[$printer_id_cashierReceipt]['print_method'] == 'ESC/POS'){
 						try {
-							@$ph = printer_open($printer_ip_cashierReceipt);
+							$ph = printer_open($printer_ip_cashierReceipt);
 						} catch (Exception $e) {
 							$ph = false;
 						}

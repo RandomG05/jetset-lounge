@@ -207,6 +207,10 @@ class Model_purchaseorderdetail extends DB_Model {
 				
 				if(!empty($dtInsertRL)){
 					$this->db->insert_batch($this->prefix."receive_detail", $dtInsertRL);
+					$recent_po_id = $this->m->get_insert_id();
+					foreach($dtInsert as $i=>$det){
+						$det[$i]['po_detail_id'] = (int)$recent_po_id-$i;
+					}
 				}
 				
 			}

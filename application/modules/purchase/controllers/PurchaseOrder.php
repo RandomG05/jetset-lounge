@@ -781,7 +781,8 @@ class PurchaseOrder extends MY_Controller {
 			$this->lib_trans->begin();
 				$q = $this->m->add($var);
 				$insert_id = $this->m->get_insert_id();
-			$this->lib_trans->commit();			
+			$this->lib_trans->commit();
+
 			if($q)
 			{  
 				$r = array('success' => true, 'id' => $insert_id, 'po_number'	=> '-', 'det_info' => array()); 		

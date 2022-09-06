@@ -67,7 +67,7 @@ class DataBilling extends MY_Controller {
 								a.card_no, a.include_tax, a.tax_percentage, a.tax_total, a.include_service, a.service_percentage, a.service_total, 
 								a.discount_id, a.discount_notes, a.discount_percentage, a.discount_price, a.discount_total, a.voucher_no, a.total_hpp, 
 								a.is_active, a.total_dp, a.compliment_total, a.total_cash, a.total_credit, a.createdby, a.updatedby, 
-								a.merge_id, a.merge_main_status, a.split_from_id, a.total_guest, a.total_crew, a.total_gh, a.lock_billing, a.qc_notes,
+								a.merge_id, a.merge_main_status, a.split_from_id, a.total_guest, a.total_crew, a.total_gh, a.lock_billing, a.qc_notes, a.time_in,
 								a.created, a.updated, a.takeaway_no_tax, a.takeaway_no_service, a.is_compliment,  
 								a.discount_perbilling, a.total_return, a.compliment_total_tax_service, a.is_half_payment,
 								a.sales_id, a.sales_percentage, a.sales_price, a.sales_type, a.customer_id, a.block_table,
