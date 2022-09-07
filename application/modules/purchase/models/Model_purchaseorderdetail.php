@@ -181,8 +181,8 @@ class Model_purchaseorderdetail extends DB_Model {
 				$this->db->where("a.po_id = ".$po_id);
 				$get_po_det = $this->db->get();
 				if($get_po_det->num_rows() > 0){
-					foreach($get_po_det->result_array() as $dt){
-						
+					foreach($get_po_det->result_array() as $i=>$dt){
+						$dtInsert[$i]['po_detail_id'] = $dt['id'];
 						if(!in_array($dt['id'], $all_receive_po_det_id)){
 							
 							foreach($all_receive_id_dt as $detRL){
