@@ -638,7 +638,7 @@ class PurchaseOrder extends MY_Controller {
 					"item_image" => $dt['item_image'],
 					"unit_id" => $dt['unit_id'],
 					"unit_name" => $dt['unit_name'],
-					"unit_code" => $dt['unit_code'],
+					"unit_id" => $dt['unit_code'],
 					"po_detail_qty" => $dt['po_detail_qty'],
 					"po_detail_status" => $dt['po_detail_status'],
 					"po_detail_purchase" => $dt['po_detail_purchase'],
@@ -646,7 +646,7 @@ class PurchaseOrder extends MY_Controller {
 					"po_detail_potongan" => $dt['po_detail_potongan'],
 					"po_detail_tax" => $dt['po_detail_tax'],
 					"po_detail_potongan_show" => $dt['po_detail_potongan_show'],
-					"po_detail_tax_show" => $dt['po_detail_tax_show'],
+					//"po_detail_tax_show" => $dt['po_detail_tax_show'],
 					"po_detail_total" => $dt['po_detail_total'],
 					"po_detail_total_show" => $dt['po_detail_total_show'],
 					"ro_id" => 0,
@@ -781,7 +781,8 @@ class PurchaseOrder extends MY_Controller {
 			$this->lib_trans->begin();
 				$q = $this->m->add($var);
 				$insert_id = $this->m->get_insert_id();
-			$this->lib_trans->commit();			
+			$this->lib_trans->commit();
+
 			if($q)
 			{  
 				$r = array('success' => true, 'id' => $insert_id, 'po_number'	=> '-', 'det_info' => array()); 		

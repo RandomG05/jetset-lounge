@@ -86,8 +86,12 @@ class Model_BillingCashierFitur extends DB_Model {
 		$card_no = $this->input->post('card_no', true);
 		$billing_notes = $this->input->post('billing_notes', true);
 		$qc_notes = $this->input->post('qc_notes', true);
-		$time_inn = $this->input->post('time_in', true);
-		$time_in = date("d-m-Y H:i:s", strtotime($this->input->post('time_in', true)));
+		try{
+			$time_in = strtotime($this->input->post('time_in', true));
+		}catch (Exception $e){
+			$time_in = strtotime(date('d-m-Y'));
+		}
+		$time_in = date('Y-m-d', $time_in);
 		$single_rate = $this->input->post('single_rate', true);
 		$sales_id = $this->input->post('sales_id', true);
 		$sales_price = $this->input->post('sales_price', true);
@@ -97,7 +101,9 @@ class Model_BillingCashierFitur extends DB_Model {
 		$total_guest = $this->input->post('total_guest', true);
 		$total_crew = $this->input->post('total_crew', true);
 		$total_gh = $this->input->post('total_gh', true);
+		$additional_fee = $this->input->post('additional_fee', true);
 		$signature = $this->input->post('signature', true);
+		$ac_reg = $this->input->post('ac_reg', true);
 		
 		$update_data = array(
 			'payment_id'	=> $payment_id,
@@ -115,7 +121,9 @@ class Model_BillingCashierFitur extends DB_Model {
 			'total_guest'	=> $total_guest,
 			'total_crew'	=> $total_crew,
 			'total_gh'		=> $total_gh,
-			'signature'		=> $signature
+			'additional_fee'=> $additional_fee,
+			'signature'		=> $signature,
+			'ac_reg'		=> $ac_reg
 		);
 		
 		$r = array('success' => false);
@@ -841,6 +849,7 @@ class Model_BillingCashierFitur extends DB_Model {
 		$billing_id = $this->input->post('billing_id', true);
 		$total_guest = $this->input->post('total_guest', true);
 		$qc_notes = $this->input->post('qc_notes', true);
+		$ac_reg = $this->input->post('ac_reg', true);
 		
 		$r = array('success' => false);
 		
@@ -859,6 +868,7 @@ class Model_BillingCashierFitur extends DB_Model {
 				'total_guest' 	=> $total_guest,
 				'qc_notes' 		=> $qc_notes,
 				'billing_notes' => $qc_notes,
+				'ac_reg'		=> $ac_reg,
 			);
 			
 			//CLOSING DATE

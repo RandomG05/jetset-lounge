@@ -204,7 +204,17 @@ class BillingCashier extends MY_Controller {
 			//logBilling($billingData, 'Create', 'Membuat Billing '.$billingData->billing_no);
 		}
 		
-		$r = array('success' => true, 'billingData' => $billingData); 
+		$r = array('success' => true, 'billingData' => $billingData);
+		if ($table_id == 2){
+			$_POST['main_billing_id'] = $billingData->id;
+			$_POST['form_type_orderProduct'] = 'add';
+			$this->getProductFromDB('Dish Washing');
+			$this->save_orderProduct(1);
+			$this->getProductFromDB('Ice Cube');
+			$this->save_orderProduct(1);
+			$this->getProductFromDB('Hot Water');
+			$this->save_orderProduct(1);
+		}
 		echo json_encode($r);
 		die();
 	}
@@ -903,7 +913,7 @@ class BillingCashier extends MY_Controller {
 	}
 	
 	/*ORDER*/
-	public function save_orderProduct(){
+	public function save_orderProduct($die=NULL){
 		$this->table_billing = $this->prefix.'billing';				
 		$this->table = $this->prefix.'billing';				
 		$this->table2 = $this->prefix.'billing_detail';				
@@ -959,6 +969,10 @@ class BillingCashier extends MY_Controller {
 		$package_item = $this->input->post('package_item');
 		$use_stok_kode_unik = $this->input->post('use_stok_kode_unik');
 		$data_stok_kode_unik = $this->input->post('data_stok_kode_unik');
+
+		$customer_id = $this->input->post('customer_id');
+		$route = $this->input->post('route');
+		$acreg = $this->input->post('ac_reg');
 		
 		//EDIT ID
 		$id = $this->input->post('id', true);
@@ -1454,6 +1468,11 @@ class BillingCashier extends MY_Controller {
 				),
 				'table'		=>  $this->table2
 			);
+			$var2 = array(
+				'customer_id'			=> $customer_id,
+				'qc_notes'				=> $route,
+				'ac_reg'				=> $acreg
+			);
 
 			$default_package = array();
 			if($product_type == 'package'){
@@ -1516,9 +1535,12 @@ class BillingCashier extends MY_Controller {
 			//SAVE
 			$insert_id = false;
 			$this->lib_trans->begin();
-				$q = $this->mdetail->add($var);
-				$insert_id = $this->mdetail->get_insert_id();
-			$this->lib_trans->commit();			
+			if($customer_id && $customer_id != 0) {
+				$this->db->update($this->table, $var2, "id = '".$main_billing_id."'");
+			}			
+			$q = $this->mdetail->add($var);
+			$insert_id = $this->mdetail->get_insert_id();
+			$this->lib_trans->commit();
 			if($q)
 			{  
 				if(!empty($billingData->id)){
@@ -1549,7 +1571,7 @@ class BillingCashier extends MY_Controller {
 			}  
 			else
 			{  
-				$r = array('success' => false);
+				$r = array('success' => false, 'info' => "THIS SHIT");
 			}
       		
 		}else
@@ -1948,7 +1970,9 @@ class BillingCashier extends MY_Controller {
 			}
 		}
 		
-		die(json_encode(($r==null or $r=='')? array('success'=>false) : $r));
+		if(!$die){
+			die(json_encode(($r==null or $r=='')? array('success'=>false) : $r));
+		}
 	}
 	
 	public function cancelOrder(){
@@ -3800,5 +3824,53 @@ class BillingCashier extends MY_Controller {
 		echo json_encode($r);
 		die();
 	}
-	
+	public function getProductFromDB($product_name){
+		$this->table = $this->prefix.'product';
+		$this->db->select("b.*");
+		$this->db->from($this->table." as b");
+		$this->db->where("b.product_name = '".$product_name."'");
+		$res = $this->db->get();
+		foreach ($res->result() as $product) {
+			$_POST['product_id'] = $product->id;
+			$_POST['category_id'] = $product->category_id;
+			$_POST['product_price'] = $product->product_price;
+			$_POST['product_price_hpp'] = $product->product_hpp;
+			$_POST['product_normal_price'] = $product->product_price;
+			$_POST['product_price_before_promo'] = $product->product_price;
+			$_POST['product_name'] = $product->product_name;
+			$_POST['order_qty'] = 1;
+			$_POST['order_notes'] = 'Catering';
+			$_POST['product_varian_id'] = "";
+			$_POST['varian_id'] = NULL;
+			$_POST['has_varian'] = $product->has_varian;
+			$_POST['is_takeaway'] = 0;
+			$_POST['is_compliment'] = 0;
+			$_POST['is_promo'] = NULL;
+			$_POST['promo_id'] = NULL;
+			$_POST['promo_tipe'] = 0;
+			$_POST['promo_percentage'] = 0;
+			$_POST['promo_price'] = 0;
+			$_POST['promo_desc'] = "";
+			$_POST['use_tax'] = $product->use_tax;
+			$_POST['use_service'] = $product->use_service;
+			$_POST['is_kerjasama'] = $product->is_kerjasama;
+			$_POST['supplier_id'] = $product->supplier_id;
+			$_POST['persentase_bagi_hasil'] = $product->persentase_bagi_hasil;
+			$_POST['total_bagi_hasil'] = $product->total_bagi_hasil;
+			
+			$_POST['is_buyget'] = NULL;
+			$_POST['buyget_id'] = NULL;
+			$_POST['buyget_tipe'] = NULL;
+			$_POST['buyget_percentage'] = NULL;
+			$_POST['buyget_qty'] = NULL;
+			$_POST['buyget_desc'] = NULL;
+			$_POST['buyget_item'] = NULL;
+			$_POST['free_item'] = "";
+			
+			$_POST['product_type'] = $product->product_type;
+			$_POST['package_item'] = "";
+			$_POST['use_stok_kode_unik'] = NULL;
+			$_POST['data_stok_kode_unik'] = NULL;
+		}
+	}
 }

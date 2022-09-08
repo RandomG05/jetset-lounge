@@ -242,7 +242,7 @@ class DataClient extends MY_Controller {
 		$prefix = $this->prefix;
 		$this->table = $this->prefix.'clients';
 		
-		$client_name = config_item('client_name');
+		$client_name = 'Jetset Lounge';
 		
 		$opt_var = array(
 			'wepos_tipe',
@@ -263,7 +263,7 @@ class DataClient extends MY_Controller {
 			$merchant_tipe = $get_opt['merchant_tipe'];
 		}
 		
-		$produk_nama = 'Gratis / Free';
+		$produk_nama = 'Paid';
 		if(!empty($get_opt['produk_nama'])){
 			$produk_nama = $get_opt['produk_nama'];
 		}
@@ -284,8 +284,8 @@ class DataClient extends MY_Controller {
 		}
 		
 		$data_client = array(
-			'client_code'  	=> 	'FREE',
-			'client_code_show'  	=> 	'FREE',
+			'client_code'  	=> 	'PAID',
+			'client_code_show'  	=> 	'PAID',
 			'client_name'  	=> 	$client_name,
 			'client_email'	=>	'',
 			'client_phone'	=>	'',
@@ -401,7 +401,7 @@ class DataClient extends MY_Controller {
 				
 				$verified = $this->weposID($id, true);
 				
-				$produk_nama = 'Gratis / Free';
+				$produk_nama = 'Paid';
 				$produk_key = 'GFR-'.strtotime(date("d-m-Y"));
 				$produk_expired = 'unlimited';
 				

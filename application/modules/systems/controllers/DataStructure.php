@@ -305,8 +305,8 @@ class DataStructure extends MY_Controller {
 		}
 		
 		//delete menu
-		//$this->db->where("id IN (".$sql_Id.")");
-		//$q = $this->db->delete($this->table);
+		$this->db->where("id IN (".$sql_Id.")");
+		$q = $this->db->delete($this->table);
 		
 		$r = '';
 		if($q)  

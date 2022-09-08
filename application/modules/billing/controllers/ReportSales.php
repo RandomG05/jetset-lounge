@@ -687,6 +687,13 @@ class ReportSales extends MY_Controller {
 		}
 		
 		//DO-PRINT
+		$lounge_bill = array();
+		$catering_bill = array();
+		foreach($data_post['report_data'] as $service_order){
+			if($service_order['table_id'] == 2) {array_push($catering_bill, $service_order);}
+			else {array_push($lounge_bill, $service_order);}
+		}
+		$data_post['report_datas'] = [$lounge_bill, $catering_bill];
 		if(!empty($do)){
 			$data_post['do'] = $do;
 		}else{
