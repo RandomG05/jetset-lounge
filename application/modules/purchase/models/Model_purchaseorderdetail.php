@@ -172,7 +172,6 @@ class Model_purchaseorderdetail extends DB_Model {
 			
 			if(!empty($dtInsert)){
 				$this->db->insert_batch($this->table, $dtInsert);
-				$first_det_id = $this->db->insert_id();
 				
 				//insert to rl
 				$dtInsertRL = array();
@@ -316,7 +315,7 @@ class Model_purchaseorderdetail extends DB_Model {
 			}
 			
 			return array('dtPO' => $dt_rowguid, 'dtInsert' => $dtInsert, 'dtUpdate' => $dtUpdate, 'dtDelete' => $dtDelete, 
-			'dtUpdate_RO' => $dtUpdate_RO, 'dtDelete_RO' => $dtDelete_RO, 'firstId' => $first_det_id);
+			'dtUpdate_RO' => $dtUpdate_RO, 'dtDelete_RO' => $dtDelete_RO);
 		}
 	}
 
