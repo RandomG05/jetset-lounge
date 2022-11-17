@@ -547,7 +547,7 @@ class BillingCashier extends MY_Controller {
 					}
 					
 				}
-				
+				$this->db->delete($this->table, array('id' => $billing_id));
 				return true;	
 			}  
 			else

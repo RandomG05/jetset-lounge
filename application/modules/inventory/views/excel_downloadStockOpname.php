@@ -1,7 +1,6 @@
 <?php
-//header("Content-Type: application/vnd.ms-excel; charset=utf-8");
-header("Content-type: application/excel; charset=utf-8");
-header("Content-Disposition: attachment; filename=".url_title($report_name.'-'.$storehouse_name.'-'.date("dmY")).".xls"); 
+header("Content-Type: application/vnd.ms-excel; charset=utf-8");
+header("Content-Disposition: attachment; filename=".url_title($report_name.'-'.date("dmY")).".xls");
 header("Expires: 0");
 header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
 header("Cache-Control: private",false);

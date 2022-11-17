@@ -475,10 +475,12 @@ if(!function_exists('generate_billing_no')){
 		
 		$scope->db->select("id,billing_no");
 		$scope->db->from($scope->table);
-		$scope->db->where("billing_no LIKE '".$billing_date."%'");
+		//$scope->db->where("billing_no LIKE '".$billing_date."%'");
+		$scope->db->where("billing_status != 'cancel'");
 		$scope->db->order_by('id', 'DESC');
+		$scope->db->limit(1);
 		$get_last = $scope->db->get();
-		if($get_last->num_rows() > 0){
+		/*if($get_last->num_rows() > 0){
 			$data_billing = $get_last->row();
 			$billing_no = $data_billing->billing_no;
 			$billing_date = date('ymd', $datenowstr);
@@ -504,11 +506,12 @@ if(!function_exists('generate_billing_no')){
 		}else{
 			$billing_date = date('ymd', $datenowstr);
 			$billing_no = 0;
-		}
-		
-		$billing_no++;
-		$length_no = strlen($billing_no);
-		switch ($length_no) {
+		}*/
+		$data_billing = $get_last->row();
+		$billing_no = (int) $data_billing->billing_no;
+		//$billing_no++;
+		//$length_no = strlen($billing_no);
+		/*switch ($length_no) {
 			case 3:
 				$billing_no = '0'.$billing_no;
 				break;
@@ -521,11 +524,11 @@ if(!function_exists('generate_billing_no')){
 			default:
 				$billing_no = '000'.$billing_no;
 				break;
-		}
+		}*/
 		
-		$billing_no = $billing_date.$billing_no;
+		//$billing_no = $billing_date.$billing_no;
 		
-		return $billing_no;		
+		return (string) $billing_no + 1;		
 		
 	}
 }	

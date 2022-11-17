@@ -1422,7 +1422,7 @@ class StockOpname extends MY_Controller {
 		if(!empty($_FILES['upload_file']['name'])){
 						
 			$config['upload_path'] = $this->file_stock_path;
-			$config['allowed_types'] = 'xls';
+			$config['allowed_types'] = '*';
 			$config['max_size']	= '1024';
 
 			$this->load->library('upload', $config);
@@ -1439,18 +1439,25 @@ class StockOpname extends MY_Controller {
 				$data_upload_temp = $this->upload->data();
 				
 				
+
 				// Load the spreadsheet reader library
-				$this->load->library('spreadsheet_Excel_Reader');
+				/*$this->load->library('spreadsheet_Excel_Reader');
 				$xls = new Spreadsheet_Excel_Reader();
-				$xls->setOutputEncoding('CP1251'); 
-				$file =  $this->file_stock_path.$data_upload_temp['file_name']."" ;
-				$xls->read($file);
+
+				$xls->setOutputEncoding('CP1251'); */
+				$file =  $this->file_stock_path.$data_upload_temp['file_name'];
+
+				//$xls->read($file);
+				$lines = str_replace(';', ',',array_splice(preg_split("/\r\n|\n|\r/", file_get_contents($file)), 4));
+				//die(json_encode(array('status' => false, 'info' => $file)));
+
 				//echo '<pre>';
+                                
 				//print_r($xls->sheets);die();
 				
 				error_reporting(E_ALL ^ E_NOTICE);
 				
-				$nr_sheets = count($xls->sheets);    
+				//$nr_sheets = count($xls->sheets);    
 				
 				$this->lib_trans->begin();
 				
@@ -1479,26 +1486,27 @@ class StockOpname extends MY_Controller {
 				
 				$import_data_opname = array();
 				
-				for($i=0; $i<$nr_sheets; $i++) {
+				for($i=0; $i</*$nr_sheets*/1; $i++) {
 					//echo $xls->boundsheets[$i]['name'];
 					//print_r($xls->sheets[$i]);
 					
-					for ($row_num = 4; $row_num <= $xls->sheets[$i]['numRows']; $row_num++) {	
-						
+					//for ($row_num = 0; $row_num <= $xls->sheets[$i]['numRows']; $row_num++) {	
+					foreach($lines as $line) {
+						list($item_id, $item_code, $item_name, $unit_name, $jumlah_awal, $jumlah_fisik, $last_in, $current_hpp_avg)	= explode(",", $line);
 						//echo '<pre>';
 						//print_r($xls->sheets[$i]['cells'][$row_num]);
 						//die();
 						
 						//id	item_name	unit_name	qty_awal	qty_fisik	notes
 						
-						$item_code = $xls->sheets[$i]['cells'][$row_num][2];								
-						$item_name = $xls->sheets[$i]['cells'][$row_num][3];								
-						$unit_name = $xls->sheets[$i]['cells'][$row_num][4];								
-						$jumlah_awal = $xls->sheets[$i]['cells'][$row_num][5];															
-						$jumlah_fisik = $xls->sheets[$i]['cells'][$row_num][6];															
+						//$item_code = $xls->sheets[$i]['cells'][$row_num][2];								
+						//$item_name = $xls->sheets[$i]['cells'][$row_num][3];								
+						//$unit_name = $xls->sheets[$i]['cells'][$row_num][4];								
+						//$jumlah_awal = $xls->sheets[$i]['cells'][$row_num][5];															
+						//$jumlah_fisik = $xls->sheets[$i]['cells'][$row_num][6];															
 						$description = '';															
 						$selisih = $jumlah_fisik-$jumlah_awal;															
-						$item_id = $xls->sheets[$i]['cells'][$row_num][1];	
+						//$item_id = $xls->sheets[$i]['cells'][$row_num][1];	
 						
 						$unit_id = 0;
 						$current_hpp_avg = 0;
