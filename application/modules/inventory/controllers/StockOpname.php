@@ -1492,7 +1492,7 @@ class StockOpname extends MY_Controller {
 					
 					//for ($row_num = 0; $row_num <= $xls->sheets[$i]['numRows']; $row_num++) {	
 					foreach($lines as $line) {
-						list($item_id, $item_code, $item_name, $unit_name, $jumlah_awal, $jumlah_fisik, $last_in, $current_hpp_avg)	= explode(",", $line);
+						list($item_id, $item_code, $item_name, $unit_name, $jumlah_awal, $jumlah_fisik)	= explode(",", $line);
 						//echo '<pre>';
 						//print_r($xls->sheets[$i]['cells'][$row_num]);
 						//die();
@@ -1513,8 +1513,8 @@ class StockOpname extends MY_Controller {
 						$last_in = 0;
 						if(!empty($dt_item[$item_id])){
 							$unit_id = $dt_item[$item_id]['unit_id'];	
-							$current_hpp_avg = $dt_item[$item_id]['item_hpp'];
-							$last_in = $dt_item[$item_id]['last_in'];						
+							$current_hpp_avg = 0;
+							$last_in = 0;
 						}
 						
 						$update_date = date('Y-m-d H:i:s');

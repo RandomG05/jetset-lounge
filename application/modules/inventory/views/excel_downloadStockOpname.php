@@ -39,8 +39,6 @@ header("Cache-Control: private",false);
 				<td class="tbl_head_td" width="140">UNIT</td>
 				<td class="tbl_head_td_xright" width="70">QTY AWAL</td>
 				<td class="tbl_head_td_xright" width="70">QTY FISIK</td>
-				<td class="tbl_head_td_xright" width="70">LAST IN</td>
-				<td class="tbl_head_td_xright" width="70">AVERAGE</td>
 				<td class="tbl_head_td" width="200">NOTES</td>
 			</tr>
 		
@@ -63,7 +61,7 @@ header("Cache-Control: private",false);
 						<tr>
 							<td class="tbl_head_td_first_xcenter" width="60">&nbsp;</td>
 							<td class="tbl_head_td" colspan="2"><?php echo $nama_category; ?></td>
-							<td class="tbl_head_td" colspan="6">&nbsp;</td>
+							<td class="tbl_head_td" colspan="4">&nbsp;</td>
 						</tr>
 						<?php
 						foreach($dt_det as $dt){
@@ -75,8 +73,6 @@ header("Cache-Control: private",false);
 								<td class="tbl_data_td"><?php echo $dt['unit_name']; ?></td>
 								<td class="tbl_data_td_xright"><?php echo $dt['total_qty_stok']; ?></td>
 								<td class="tbl_data_td_xright"><?php echo $dt['total_qty_stok']; ?></td>
-								<td class="tbl_data_td_xright"><?php echo $dt['last_in']; ?></td>
-								<td class="tbl_data_td_xright">Rp. <?php echo $dt['item_hpp']; ?></td>
 								<td class="tbl_data_td">&nbsp;</td>
 							</tr>
 							<?php
